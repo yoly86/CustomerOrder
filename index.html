@@ -13,136 +13,47 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#111827', 
-                        secondary: '#4B5563', 
-                        accent: '#F8B4C4', 
-                        accentDark: '#E89AB0', 
-                        cardbg: '#E5E7EB', 
-                        background: '#FFFFFF', 
-                    }
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'], },
+                    colors: { primary: '#111827', secondary: '#4B5563', accent: '#F8B4C4', accentDark: '#E89AB0', cardbg: '#E5E7EB', background: '#FFFFFF', }
                 }
             }
         }
     </script>
     <style>
-        body {
-            background-color: #FFFFFF;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .step-container {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        .step-container.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { background-color: #FFFFFF; -webkit-tap-highlight-color: transparent; }
+        .step-container { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .step-container.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         .color-radio { display: none; }
         .color-radio + label {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            display: inline-block;
-            cursor: pointer;
-            border: 3px solid transparent;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            width: 3rem; height: 3rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            cursor: pointer; border: 3px solid transparent; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s;
         }
-        .color-radio:checked + label {
-            border-color: #111827;
-            transform: scale(1.1);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
+        .color-radio:checked + label { border-color: #111827; transform: scale(1.15); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
 
-        .card-checkbox { display: none; }
-        .card-checkbox + label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem 1rem;
-            border: 2px solid transparent;
-            border-radius: 1.5rem;
-            background-color: #F3F4F6;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            height: 100%;
+        .card-checkbox, .card-radio { display: none; }
+        .card-checkbox + label, .card-radio + label {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 1.25rem 0.5rem; text-align: center; height: 100%; border: 2px solid transparent;
+            border-radius: 1.5rem; background-color: #F3F4F6; cursor: pointer; transition: all 0.2s;
         }
-        .card-checkbox:checked + label {
-            background-color: #F8B4C4;
-            color: #111827;
-        }
-
-        .card-radio { display: none; }
-        .card-radio + label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1.25rem 0.5rem;
-            text-align: center;
-            height: 100%;
-            border: 2px solid transparent;
-            border-radius: 1.5rem;
-            background-color: #F3F4F6;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .card-radio:checked + label {
-            background-color: #F8B4C4;
-            color: #111827;
-        }
+        .card-checkbox:checked + label, .card-radio:checked + label { background-color: #F8B4C4; color: #111827; }
         
-        .action-bar {
-            background: white;
-            padding: 1rem;
-            box-shadow: 0 -4px 10px -1px rgba(0, 0, 0, 0.05);
-            z-index: 50;
+        .style-radio { display: none; }
+        .style-radio + label {
+            display: block; padding: 0.75rem 1rem; border: 2px solid transparent; background-color: #F9FAFB;
+            border-radius: 0.75rem; cursor: pointer; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.05em; transition: all 0.2s; color: #4B5563;
         }
+        .style-radio:checked + label { background-color: #F8B4C4; color: #111827; }
 
-        .qty-btn {
-            width: 2.25rem;
-            height: 2.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.5rem;
-            background-color: #F3F4F6;
-            color: #111827;
-            transition: all 0.15s;
-            font-size: 1rem;
-        }
-        .qty-btn:active {
-            background-color: #E5E7EB;
-            transform: scale(0.95);
-        }
-        .qty-input {
-            width: 2.5rem;
-            text-align: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            border: none;
-            background: transparent;
-            outline: none;
-        }
-        
-        .file-drop-area {
-            border: 2px dashed #D1D5DB;
-            transition: all 0.2s;
-        }
-        .file-drop-area:active {
-            border-color: #F8B4C4;
-            background-color: #fdf2f4;
-        }
+        .action-bar { background: white; padding: 1rem; box-shadow: 0 -4px 10px -1px rgba(0, 0, 0, 0.05); z-index: 50; }
+        .qty-btn { width: 2.25rem; height: 2.25rem; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem; background-color: #F3F4F6; color: #111827; transition: all 0.15s; font-size: 1rem; }
+        .qty-btn:active { background-color: #E5E7EB; transform: scale(0.95); }
+        .qty-input { width: 2.5rem; text-align: center; font-weight: 800; font-size: 1.1rem; border: none; background: transparent; outline: none; }
+        .file-drop-area { border: 2px dashed #D1D5DB; transition: all 0.2s; }
+        .file-drop-area:active { border-color: #F8B4C4; background-color: #fdf2f4; }
     </style>
 </head>
 
@@ -152,10 +63,9 @@
         <div>
             <h1 class="text-xl font-extrabold tracking-tight">NEW ORDER</h1>
             <div class="text-[10px] font-bold tracking-widest text-gray-500 uppercase mt-0.5" id="stepIndicatorContainer">
-                Step <span id="currentStepHeader">1</span> / 7
+                Step <span id="currentStepHeader">1</span> / 9
             </div>
         </div>
-        
         <button type="button" id="globalCartBtn" onclick="jumpToCart()" class="relative text-gray-800 hover:text-primary transition-colors p-2 -mr-2">
             <i class="fa-solid fa-cart-shopping text-2xl"></i>
             <span id="globalCartBadge" class="absolute top-0 right-0 bg-accent text-primary text-[10px] font-extrabold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm hidden">0</span>
@@ -163,420 +73,162 @@
     </header>
 
     <div class="bg-gray-100 h-1 w-full" id="progressBarContainer">
-        <div id="progressBar" class="bg-primary h-1 transition-all duration-300" style="width: 14.28%;"></div>
+        <div id="progressBar" class="bg-primary h-1 transition-all duration-300" style="width: 11.11%;"></div>
     </div>
 
     <main class="flex-1 overflow-y-auto px-5 py-6" id="formContainer">
 
         <div id="step1" class="step-container active max-w-md mx-auto">
-            <h2 class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Garment</h2>
-            <p class="text-gray-500 mb-6 font-medium">Select an item below to configure your fit and source.</p>
-            
-            <div id="garmentTypeOptions" class="space-y-6">
-                <div>
-                    <h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-100 pb-2">Apparel & Tops</h4>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <input type="radio" name="garmentType" id="typeTshirt" value="T-Shirt" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeTshirt">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <i class="fa-solid fa-shirt text-xl"></i>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">T-Shirt</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Standard crewneck</span>
-                            </label>
+            <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Department</h2>
+            <p class="text-gray-500 mb-6 font-medium">Select the department or supply your own items.</p>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="col-span-2">
+                    <input type="radio" name="department" id="deptExpress" value="Express" class="card-radio" onchange="handleSelection(1)">
+                    <label for="deptExpress" class="!flex-row !justify-start !p-4 !text-left !bg-pink-50">
+                        <div class="w-12 h-12 bg-pink-500 text-white rounded-full flex items-center justify-center shadow-sm mr-4 shrink-0">
+                            <i class="fa-solid fa-bolt text-xl"></i>
                         </div>
-                        
                         <div>
-                            <input type="radio" name="garmentType" id="typeLongSleeve" value="Long Sleeve" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeLongSleeve">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M21.9 7.4l-3.2-3.8c-.3-.4-.8-.6-1.3-.6h-11c-.5 0-1 .2-1.3.6L1.9 7.4c-.4.5-.4 1.2-.1 1.7L4 12v9c0 .6.4 1 1 1h14c.6 0 1-.4 1-1v-9l2.2-2.9c.3-.5.3-1.2-.1-1.7zM6 20V11.2l-2.4-3.2L6.1 5h11.8l2.5 3-2.4 3.2V20H6z"/></svg>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Long Sleeve</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Full arm coverage</span>
-                            </label>
+                            <span class="block text-sm font-bold uppercase tracking-wider text-pink-900">Express Match</span>
+                            <span class="block text-[10px] font-bold text-pink-700 mt-0.5 opacity-80">I know exactly what I want</span>
                         </div>
-
-                        <div>
-                            <input type="radio" name="garmentType" id="typeHoodie" value="Hoodie" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeHoodie">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <i class="fa-solid fa-user-ninja text-xl"></i>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Hoodie</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Premium pullover</span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <input type="radio" name="garmentType" id="typeSweater" value="Sweater" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeSweater">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Sweater</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Classic crewneck</span>
-                            </label>
-                        </div>
-                    </div>
+                    </label>
                 </div>
-
-                <div>
-                    <h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-100 pb-2">Accessories</h4>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <input type="radio" name="garmentType" id="typeHat" value="Hat/Cap" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeHat">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4c-3.3 0-6 2.7-6 6v2H4a2 2 0 0 0-2 2v2h20v-2a2 2 0 0 0-2-2h-2v-2c0-3.3-2.7-6-6-6z"></path><path d="M12 4v8"></path></svg>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Hat / Cap</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Headwear styles</span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <input type="radio" name="garmentType" id="typeSocks" value="Socks" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeSocks">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <i class="fa-solid fa-socks text-xl"></i>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Socks</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Athletic or dress</span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <input type="radio" name="garmentType" id="typeBags" value="Bags & Accessories" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeBags">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <i class="fa-solid fa-bag-shopping text-xl"></i>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Bags & Totes</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Canvas & backpacks</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-100 pb-2">Bottoms</h4>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <input type="radio" name="garmentType" id="typePants" value="Pants" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typePants">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14l-1.5 16h-4L12 12l-1.5 8h-4L5 4z"/></svg>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Pants / Sweats</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Joggers & shorts</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-100 pb-2">Team & Group</h4>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <input type="radio" name="garmentType" id="typeTeam" value="Team Apparel" class="card-radio" onclick="openGarmentModal(this.value)">
-                            <label for="typeTeam">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0">
-                                    <i class="fa-solid fa-users text-xl"></i>
-                                </div>
-                                <span class="block text-sm font-bold uppercase tracking-wider">Team Apparel</span>
-                                <span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">Jerseys & uniforms</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                <div><input type="radio" name="department" id="deptWomens" value="Women's" class="card-radio" onchange="handleSelection(1)"><label for="deptWomens"><div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0"><i class="fa-solid fa-person-dress text-2xl"></i></div><span class="block text-sm font-bold uppercase tracking-wider">Women's</span></label></div>
+                <div><input type="radio" name="department" id="deptMens" value="Men's" class="card-radio" onchange="handleSelection(1)"><label for="deptMens"><div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0"><i class="fa-solid fa-person text-2xl"></i></div><span class="block text-sm font-bold uppercase tracking-wider">Men's</span></label></div>
+                <div><input type="radio" name="department" id="deptAccessories" value="Accessories" class="card-radio" onchange="handleSelection(1)"><label for="deptAccessories"><div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0"><i class="fa-solid fa-glasses text-xl"></i></div><span class="block text-sm font-bold uppercase tracking-wider">Accessories</span></label></div>
+                <div><input type="radio" name="department" id="deptSupplied" value="Customer Supplied" class="card-radio" onchange="handleSelection(1)"><label for="deptSupplied"><div class="w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center shadow-sm mb-3 shrink-0"><i class="fa-solid fa-box-open text-xl"></i></div><span class="block text-sm font-bold uppercase tracking-wider">Supplied</span><span class="block text-[9px] font-bold text-gray-500 mt-1">Provide your own</span></label></div>
             </div>
-            <p id="errorStep1_Type" class="text-red-500 font-semibold text-sm mt-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select an item and complete its configuration.</p>
+            <p id="errorStep1" class="text-red-500 font-semibold text-sm mt-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please make a selection.</p>
         </div>
 
         <div id="step2" class="step-container max-w-md mx-auto">
-            <div class="flex items-center mb-2">
-                <span class="text-xs font-extrabold uppercase tracking-widest text-primary bg-gray-100 px-3 py-1 rounded-full" id="selectedGarmentLabel">T-Shirt</span>
-            </div>
-            <h2 class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Color</h2>
-            <p class="text-gray-500 mb-8 font-medium text-sm">Select the base color. (If supplying your own, pick the closest match for the proof mockup).</p>
+            <h2 id="step2Heading" class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Category</h2>
+            <div id="bcStep2" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
+            <p id="step2Desc" class="text-gray-500 mb-6 font-medium">Select a category.</p>
             
-            <div class="grid grid-cols-4 gap-6 justify-items-center" id="colorOptions">
-                <div>
-                    <input type="radio" name="garmentColor" id="colorWhite" value="White" class="color-radio" onchange="validateStep(2)">
-                    <label for="colorWhite" style="background-color: #ffffff; border-color: #e5e7eb;"></label>
-                    <span class="block text-xs font-bold tracking-wider uppercase text-center mt-2 text-gray-600">White</span>
-                </div>
-                <div>
-                    <input type="radio" name="garmentColor" id="colorBlack" value="Black" class="color-radio" onchange="validateStep(2)">
-                    <label for="colorBlack" style="background-color: #1a1a1a;"></label>
-                    <span class="block text-xs font-bold tracking-wider uppercase text-center mt-2 text-gray-600">Black</span>
-                </div>
-                <div>
-                    <input type="radio" name="garmentColor" id="colorNavy" value="Navy" class="color-radio" onchange="validateStep(2)">
-                    <label for="colorNavy" style="background-color: #1e3a8a;"></label>
-                    <span class="block text-xs font-bold tracking-wider uppercase text-center mt-2 text-gray-600">Navy</span>
-                </div>
-                <div>
-                    <input type="radio" name="garmentColor" id="colorRed" value="Red" class="color-radio" onchange="validateStep(2)">
-                    <label for="colorRed" style="background-color: #ef4444;"></label>
-                    <span class="block text-xs font-bold tracking-wider uppercase text-center mt-2 text-gray-600">Red</span>
-                </div>
-                <div>
-                    <input type="radio" name="garmentColor" id="colorGray" value="Gray" class="color-radio" onchange="validateStep(2)">
-                    <label for="colorGray" style="background-color: #9ca3af;"></label>
-                    <span class="block text-xs font-bold tracking-wider uppercase text-center mt-2 text-gray-600">Gray</span>
-                </div>
-                <div>
-                    <input type="radio" name="garmentColor" id="colorGreen" value="Green" class="color-radio" onchange="validateStep(2)">
-                    <label for="colorGreen" style="background-color: #10b981;"></label>
-                    <span class="block text-xs font-bold tracking-wider uppercase text-center mt-2 text-gray-600">Green</span>
-                </div>
-                <div>
-                    <input type="radio" name="garmentColor" id="colorPink" value="Pink" class="color-radio" onchange="validateStep(2)">
-                    <label for="colorPink" style="background-color: #F8B4C4;"></label>
-                    <span class="block text-xs font-bold tracking-wider uppercase text-center mt-2 text-gray-600">Pink</span>
-                </div>
-            </div>
+            <div id="categoryGrid" class="grid grid-cols-2 gap-3"></div>
             
-            <p id="errorStep2" class="text-red-500 font-semibold text-sm mt-8 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select a color.</p>
+            <div id="expressGrid" class="hidden">
+                <div class="mb-6">
+                    <label class="block text-xs font-extrabold text-gray-700 uppercase tracking-wider mb-2 pl-1">1. Upload Garment Image</label>
+                    <div class="file-drop-area rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-white" onclick="document.getElementById('expressFileInput').click()">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-pink-500 mb-2"></i>
+                        <span class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-1" id="expressFileName">Tap to select image</span>
+                        <span class="text-[10px] text-gray-400 font-semibold">(We will source this exact style & color)</span>
+                        <input type="file" id="expressFileInput" class="hidden" accept="image/*" onchange="handleExpressFile(this)">
+                    </div>
+                </div>
+                <label class="block text-xs font-extrabold text-gray-700 uppercase tracking-wider mb-2 pl-1">2. What kind of item is it?</label>
+                <div class="grid grid-cols-3 gap-2" id="expressBaseTypeGrid"></div>
+            </div>
+
+            <p id="errorStep2" class="text-red-500 font-semibold text-sm mt-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please complete your selections above.</p>
         </div>
 
         <div id="step3" class="step-container max-w-md mx-auto">
-            <h2 id="placementHeading" class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Placements</h2>
-            <p class="text-gray-500 mb-6 font-medium">Select all locations you would like your designs to be placed.</p>
-            
-            <div class="grid grid-cols-2 gap-4" id="placementOptions">
-                <div>
-                    <input type="checkbox" name="placement" id="placeFullFront" value="Full Front" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeFullFront">
-                        <img src="TShirtFullFront.png" alt="Full Front" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Full Front</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeFrontChest" value="Front Chest" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeFrontChest">
-                        <img src="TShirtFrontChest.png" alt="Front Chest" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Front Chest</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeLeftChest" value="Left Chest" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeLeftChest">
-                        <img src="TShirtLeftChest.png" alt="Left Chest" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Left Chest</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeFullBack" value="Full Back" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeFullBack">
-                        <img src="TShirtFullBack.png" alt="Full Back" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Full Back</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeUpperBack" value="Upper Back" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeUpperBack">
-                        <img src="TShirtUpperBack.png" alt="Upper Back" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Upper Back</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeBackCollar" value="Back Collar" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeBackCollar">
-                        <img src="TShirtBackCollar.png" alt="Back Collar" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Back Collar</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeShortSleeve" value="Short Sleeve" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeShortSleeve">
-                        <img src="TShirtShortSleeve.png" alt="Short Sleeve" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Short Sleeve</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeLongSleeve" value="Long Sleeve" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeLongSleeve">
-                        <img src="LongSleeve.png" alt="Long Sleeve" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Long Sleeve (Long Sleeve Only)</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeHatFront" value="Front" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeHatFront">
-                        <img src="Front.png" alt="Front" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Front</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeHatFrontLeft" value="Front Left" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeHatFrontLeft">
-                        <img src="HatFrontLeft.png" alt="Front Left" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Front Left</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeHatRight" value="Right Side" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeHatRight">
-                        <img src="HatRight.png" alt="Right Side" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Right Side</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeHatBack" value="Back" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeHatBack">
-                        <img src="HatBack.png" alt="Back" class="w-full h-32 object-contain mb-3 rounded-lg mix-blend-multiply">
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Back</span>
-                    </label>
-                </div>
-                <div>
-                    <input type="checkbox" name="placement" id="placeCustom" value="Custom Placement" class="card-checkbox" onchange="validateStep(3)">
-                    <label for="placeCustom">
-                        <div class="w-full h-32 flex items-center justify-center mb-3 bg-gray-100 rounded-lg text-gray-400">
-                            <i class="fa-solid fa-star text-4xl"></i>
-                        </div>
-                        <span class="text-xs font-extrabold tracking-widest uppercase">Custom / See Notes</span>
-                    </label>
-                </div>
-            </div>
-            <p id="errorStep3" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Select at least one location.</p>
+            <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Item Type</h2>
+            <div id="bcStep3" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
+            <p class="text-gray-500 mb-6 font-medium">Select the specific item to configure your source.</p>
+            <div id="itemGrid" class="grid grid-cols-2 gap-3"></div>
+            <p id="errorStep3" class="text-red-500 font-semibold text-sm mt-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select an item and complete its configuration.</p>
         </div>
 
         <div id="step4" class="step-container max-w-md mx-auto">
-            <h2 class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Method</h2>
-            <p class="text-gray-500 mb-6 font-medium">Choose print or embroidery for each location.</p>
+            <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Color</h2>
+            <div id="bcStep4" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
+            <p class="text-gray-500 mb-6 font-medium text-sm">Select the base color for your items.</p>
             
-            <div id="decorationOptionsContainer" class="space-y-4">
+            <div class="grid grid-cols-4 gap-y-6 gap-x-2 justify-items-center" id="colorOptions">
+                </div>
+
+            <div id="customColorWrapper" class="mt-8 hidden animate-[fadeIn_0.3s_ease-in-out] bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                <label class="block text-xs font-extrabold text-gray-700 uppercase tracking-wider mb-2">Describe Custom Color</label>
+                <input type="text" id="customColorInput" class="w-full px-5 py-4 bg-white border-2 border-transparent rounded-xl font-bold focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="e.g. Heather Indigo, Tie-Dye, etc." oninput="validateStep(4)">
+                <p class="text-[10px] text-gray-500 mt-2 font-medium"><i class="fa-solid fa-circle-info mr-1"></i> Press <strong>Next Step</strong> when finished.</p>
             </div>
             
-            <p id="errorStep4" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select a method for all locations.</p>
+            <p id="errorStep4" class="text-red-500 font-semibold text-sm mt-8 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select or enter a color.</p>
         </div>
 
         <div id="step5" class="step-container max-w-md mx-auto">
-            <h2 class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Artwork</h2>
-            <p class="text-gray-500 mb-6 font-medium">Provide design details for each location.</p>
-            
-            <div id="artworkDetailsContainer" class="space-y-6">
-            </div>
-
-            <p id="errorStep5" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please complete all fields and file selections above.</p>
+            <h2 id="placementHeading" class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Placements</h2>
+            <div id="bcStep5" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
+            <p class="text-gray-500 mb-6 font-medium">Select all locations you would like your designs to be placed.</p>
+            <div class="grid grid-cols-2 gap-4" id="placementOptions"></div>
+            <p id="errorStep5" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Select at least one location.</p>
         </div>
 
         <div id="step6" class="step-container max-w-md mx-auto">
-            <h2 class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Quantities</h2>
+            <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Method</h2>
+            <div id="bcStep6" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
+            <p class="text-gray-500 mb-6 font-medium">Choose print or embroidery for each location.</p>
+            <div id="decorationOptionsContainer" class="space-y-4"></div>
+            <p id="errorStep6" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select a method for all locations.</p>
+        </div>
+
+        <div id="step7" class="step-container max-w-md mx-auto">
+            <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Artwork</h2>
+            <div id="bcStep7" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
+            <p class="text-gray-500 mb-6 font-medium">Provide design details for each location.</p>
+            <div id="artworkDetailsContainer" class="space-y-6"></div>
+            <p id="errorStep7" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please complete all fields and file selections above.</p>
+        </div>
+
+        <div id="step8" class="step-container max-w-md mx-auto">
+            <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Quantities</h2>
+            <div id="bcStep8" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
             <p class="text-gray-500 mb-6 font-medium">Specify amounts for each size.</p>
             
             <div class="bg-gray-50 rounded-3xl p-4 mb-6">
                 <div class="grid grid-cols-2 gap-x-6 gap-y-2">
                     <div class="divide-y divide-gray-200/50">
-                        <div class="py-2"><h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">Youth</h4></div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">YS</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YS', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-YS" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YS', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">YM</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YM', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-YM" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YM', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">YL</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-YL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YL', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        
-                        <div class="py-2 mt-2"><h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">Adult</h4></div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">XS</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XS', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-XS" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XS', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">S</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('S', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-S" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('S', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
+                        <div class="py-2"><h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">Adult</h4></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">XS</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XS', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-XS" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XS', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">S</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('S', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-S" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('S', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">M</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('M', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-M" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('M', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">L</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('L', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-L" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('L', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">XL</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XL', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">2XL</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('2XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-2XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('2XL', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
                     </div>
-
                     <div class="divide-y divide-gray-200/50">
-                        <div class="py-2"><h4 class="text-[10px] font-extrabold text-transparent uppercase tracking-widest">Spacer</h4></div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">M</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('M', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-M" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('M', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">L</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('L', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-L" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('L', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">XL</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('XL', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
+                        <div class="py-2"><h4 class="text-[10px] font-extrabold text-transparent uppercase tracking-widest">Adult Cont.</h4></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">3XL</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('3XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-3XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('3XL', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">4XL</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('4XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-4XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('4XL', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">5XL</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('5XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-5XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('5XL', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
                         
-                        <div class="py-2 mt-2"><h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">Extended</h4></div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">2XL</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('2XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-2XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('2XL', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">3XL</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('3XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-3XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('3XL', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
-                        <div class="flex items-center justify-between py-2">
-                            <span class="font-extrabold text-gray-800 text-sm w-8">4XL</span>
-                            <div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('4XL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-4XL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('4XL', 1)"><i class="fa-solid fa-plus"></i></button></div>
-                        </div>
+                        <div class="py-2 mt-2"><h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">Youth</h4></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">YS</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YS', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-YS" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YS', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">YM</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YM', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-YM" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YM', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
+                        <div class="flex items-center justify-between py-2"><span class="font-extrabold text-gray-800 text-sm w-8">YL</span><div class="flex items-center"><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YL', -1)"><i class="fa-solid fa-minus"></i></button><input type="number" id="qty-YL" class="qty-input w-8 text-sm" value="0" min="0" readonly><button type="button" class="qty-btn h-8 w-8 text-xs" onclick="updateQty('YL', 1)"><i class="fa-solid fa-plus"></i></button></div></div>
                     </div>
                 </div>
-
-                <div class="p-4 pt-6 flex justify-between items-center border-t border-gray-200 mt-4">
-                    <span class="font-bold text-gray-500 uppercase tracking-widest text-sm">Total Pieces</span>
-                    <span class="text-3xl font-black text-primary" id="totalQtyDisplay">0</span>
-                </div>
+                <div class="p-4 pt-6 flex justify-between items-center border-t border-gray-200 mt-4"><span class="font-bold text-gray-500 uppercase tracking-widest text-sm">Total Pieces</span><span class="text-3xl font-black text-primary" id="totalQtyDisplay">0</span></div>
             </div>
-            
-            <p id="errorStep6" class="text-red-500 font-semibold text-sm mt-2 mb-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please add at least one item.</p>
-
+            <p id="errorStep8" class="text-red-500 font-semibold text-sm mt-2 mb-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please add at least one item.</p>
             <div class="mt-6 p-6 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNlN2U1ZTQiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PC9zdmc+')] bg-gray-50 border border-gray-200 rounded-3xl">
                 <h3 class="font-extrabold text-gray-900 mb-2 uppercase tracking-tight">Current Selection</h3>
                 <div class="text-sm text-gray-600 font-medium" id="currentItemSummary">Complete selections above to preview.</div>
             </div>
         </div>
 
-        <div id="step7" class="step-container max-w-md mx-auto">
+        <div id="step9" class="step-container max-w-md mx-auto">
             <h2 class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Review</h2>
             <p class="text-gray-500 mb-6 font-medium">Review items and finalize request.</p>
             
             <div class="bg-gray-50 rounded-3xl mb-8 p-1">
                 <div class="px-5 py-4 flex justify-between items-center">
                     <h3 class="font-extrabold text-gray-900 uppercase tracking-wider text-sm">Your Cart <span class="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full ml-2" id="itemCountBadge">1</span></h3>
-                    
-                    <button type="button" onclick="continueShoppingFromReview()" class="text-sm text-pink-500 font-bold hover:text-pink-600 transition-colors uppercase tracking-wider">
-                        <i class="fa-solid fa-plus mr-1"></i> Add More
-                    </button>
+                    <button type="button" onclick="continueShoppingFromReview()" class="text-sm text-pink-500 font-bold hover:text-pink-600 transition-colors uppercase tracking-wider"><i class="fa-solid fa-plus mr-1"></i> Add More</button>
                 </div>
-                <ul id="orderSummaryList" class="divide-y divide-white/60 bg-gray-50 rounded-b-3xl">
-                </ul>
+                <ul id="orderSummaryList" class="divide-y divide-white/60 bg-gray-50 rounded-b-3xl"></ul>
             </div>
 
             <div class="mb-8">
                 <h3 class="font-extrabold text-gray-900 uppercase tracking-wider text-sm mb-4 pl-1">Fulfillment Method</h3>
                 <div class="grid grid-cols-2 gap-3 mb-4">
-                    <div class="relative">
-                        <input type="radio" name="fulfillmentOption" id="fulPickup" value="Pickup" class="peer hidden" checked onchange="toggleAddressField()">
-                        <label for="fulPickup" class="flex flex-col p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 transition-colors text-center h-full justify-center">
-                            <i class="fa-solid fa-store mb-2 text-xl opacity-80"></i>
-                            <span class="font-extrabold text-sm uppercase tracking-wider">Local Pickup</span>
-                            <span class="text-[10px] font-bold opacity-80 mt-1">Beaumont, AB</span>
-                        </label>
-                    </div>
-                    <div class="relative">
-                        <input type="radio" name="fulfillmentOption" id="fulShipping" value="Shipping" class="peer hidden" onchange="toggleAddressField()">
-                        <label for="fulShipping" class="flex flex-col p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-primary peer-checked:text-white transition-colors text-center h-full justify-center">
-                            <i class="fa-solid fa-truck mb-2 text-xl opacity-80"></i>
-                            <span class="font-extrabold text-sm uppercase tracking-wider">Shipping</span>
-                            <span class="text-[10px] font-bold opacity-80 mt-1">Rates calculated on quote</span>
-                        </label>
-                    </div>
+                    <div class="relative"><input type="radio" name="fulfillmentOption" id="fulPickup" value="Pickup" class="peer hidden" checked onchange="toggleAddressField()"><label for="fulPickup" class="flex flex-col p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 transition-colors text-center h-full justify-center"><i class="fa-solid fa-store mb-2 text-xl opacity-80"></i><span class="font-extrabold text-sm uppercase tracking-wider">Local Pickup</span><span class="text-[10px] font-bold opacity-80 mt-1">Beaumont, AB</span></label></div>
+                    <div class="relative"><input type="radio" name="fulfillmentOption" id="fulShipping" value="Shipping" class="peer hidden" onchange="toggleAddressField()"><label for="fulShipping" class="flex flex-col p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-primary peer-checked:text-white transition-colors text-center h-full justify-center"><i class="fa-solid fa-truck mb-2 text-xl opacity-80"></i><span class="font-extrabold text-sm uppercase tracking-wider">Shipping</span><span class="text-[10px] font-bold opacity-80 mt-1">Rates calculated on quote</span></label></div>
                 </div>
                 <div id="addressContainer" class="hidden animate-[fadeIn_0.3s_ease-in-out]">
                     <textarea id="shippingAddress" rows="3" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Enter your full shipping address..."></textarea>
@@ -586,340 +238,374 @@
             <div class="mb-8">
                 <h3 class="font-extrabold text-gray-900 uppercase tracking-wider text-sm mb-4 pl-1">Production Timeline</h3>
                 <div class="space-y-3 mb-4">
-                    <div class="relative">
-                        <input type="radio" name="deliveryOption" id="delStandard" value="Standard" class="peer hidden" checked onchange="validateStep(7)">
-                        <label for="delStandard" class="flex items-center p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 transition-colors">
-                            <div class="flex-1">
-                                <span class="font-extrabold block uppercase tracking-wider text-sm">Standard Production</span>
-                                <span class="text-xs font-medium opacity-80">Approx. 10 Working Days</span>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="relative">
-                        <input type="radio" name="deliveryOption" id="delRush" value="Rush" class="peer hidden" onchange="validateStep(7)">
-                        <label for="delRush" class="flex items-center p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-primary peer-checked:text-white transition-colors">
-                            <div class="flex-1">
-                                <span class="font-extrabold block uppercase tracking-wider text-sm">Rush Order</span>
-                                <span class="text-xs font-medium opacity-80">Faster turnaround (Fees apply)</span>
-                            </div>
-                        </label>
-                    </div>
+                    <div class="relative"><input type="radio" name="deliveryOption" id="delStandard" value="Standard" class="peer hidden" checked onchange="validateStep(9)"><label for="delStandard" class="flex items-center p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 transition-colors"><div class="flex-1"><span class="font-extrabold block uppercase tracking-wider text-sm">Standard Production</span><span class="text-xs font-medium opacity-80">Approx. 10 Working Days</span></div></label></div>
+                    <div class="relative"><input type="radio" name="deliveryOption" id="delRush" value="Rush" class="peer hidden" onchange="validateStep(9)"><label for="delRush" class="flex items-center p-4 border-2 border-transparent bg-gray-50 rounded-2xl cursor-pointer peer-checked:bg-primary peer-checked:text-white transition-colors"><div class="flex-1"><span class="font-extrabold block uppercase tracking-wider text-sm">Rush Order</span><span class="text-xs font-medium opacity-80">Faster turnaround (Fees apply)</span></div></label></div>
                 </div>
-                <div>
-                    <label class="block text-xs font-extrabold text-gray-700 uppercase tracking-wider mb-2 pl-1">Event / In-Hands Date <span class="text-gray-400 font-medium normal-case tracking-normal">(Optional)</span></label>
-                    <input type="date" id="eventDate" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium text-gray-700 focus:bg-white focus:border-primary outline-none transition-all">
-                </div>
+                <div><label class="block text-xs font-extrabold text-gray-700 uppercase tracking-wider mb-2 pl-1">Event / In-Hands Date <span class="text-gray-400 font-medium normal-case tracking-normal">(Optional)</span></label><input type="date" id="eventDate" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium text-gray-700 focus:bg-white focus:border-primary outline-none transition-all"></div>
             </div>
 
             <div class="mb-8">
                 <h3 class="font-extrabold text-gray-900 uppercase tracking-wider text-sm mb-4 pl-1">Contact Details</h3>
-                
                 <div class="space-y-4">
-                    <div>
-                        <input type="text" id="customerName" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Full Name *" oninput="validateStep(7)">
-                    </div>
-                    <div>
-                        <input type="email" id="customerEmail" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Email Address *" oninput="validateStep(7)">
-                    </div>
-                    <div>
-                        <input type="tel" id="customerPhone" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Phone Number *" oninput="validateStep(7)">
-                    </div>
-                    <div>
-                        <textarea id="orderNotes" rows="3" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="General order notes or special requests..."></textarea>
-                    </div>
+                    <div><input type="text" id="customerName" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Full Name *" oninput="validateStep(9)"></div>
+                    <div><input type="email" id="customerEmail" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Email Address *" oninput="validateStep(9)"></div>
+                    <div><input type="tel" id="customerPhone" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Phone Number *" oninput="validateStep(9)"></div>
+                    <div><textarea id="orderNotes" rows="3" class="w-full px-5 py-4 bg-gray-50 border-2 border-transparent rounded-2xl font-medium focus:bg-white focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="General order notes or special requests..."></textarea></div>
                 </div>
             </div>
 
             <div class="mb-4 bg-gray-50 p-5 rounded-2xl border border-gray-200">
                 <label class="flex items-start space-x-3 cursor-pointer">
-                    <input type="checkbox" id="termsCheck" class="w-5 h-5 accent-primary mt-0.5 shrink-0" onchange="validateStep(7)">
-                    <span class="text-xs text-gray-600 font-medium leading-relaxed">
-                        I understand that submitting this form is a <strong>request for a quote</strong>. No payment is required today. Production begins only after final artwork approval and invoice payment. I acknowledge that if I am supplying my own garments, Triple One Threads is not responsible for replacement costs in the event of production errors.
-                    </span>
+                    <input type="checkbox" id="termsCheck" class="w-5 h-5 accent-primary mt-0.5 shrink-0" onchange="validateStep(9)">
+                    <span class="text-xs text-gray-600 font-medium leading-relaxed">I understand that submitting this form is a <strong>request for a quote</strong>. No payment is required today. Production begins only after final artwork approval and invoice payment. I acknowledge that if I am supplying my own garments, Triple One Threads is not responsible for replacement costs in the event of production errors.</span>
                 </label>
             </div>
-            
-            <p id="errorStep7" class="text-red-500 font-semibold text-sm mt-2 mb-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please complete contact info and accept terms.</p>
+            <p id="errorStep9" class="text-red-500 font-semibold text-sm mt-2 mb-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please complete contact info and accept terms.</p>
         </div>
         
         <div id="stepSuccess" class="step-container max-w-md mx-auto text-center py-16">
-            <div class="w-24 h-24 bg-accent text-primary rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
-                <i class="fa-solid fa-check text-4xl"></i>
-            </div>
+            <div class="w-24 h-24 bg-accent text-primary rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg"><i class="fa-solid fa-check text-4xl"></i></div>
             <h2 class="text-4xl font-extrabold mb-4 tracking-tight uppercase">Received!</h2>
             <p class="text-gray-500 mb-10 font-medium text-lg">Thank you, <span id="successName" class="font-bold text-gray-900"></span>. We are building your quote and will email you shortly.</p>
-            
-            <button onclick="resetForm()" class="bg-gray-100 text-gray-900 font-extrabold uppercase tracking-widest py-4 px-6 rounded-2xl hover:bg-gray-200 transition-colors w-full">
-                Start New Request
-            </button>
+            <button onclick="resetForm()" class="bg-gray-100 text-gray-900 font-extrabold uppercase tracking-widest py-4 px-6 rounded-2xl hover:bg-gray-200 transition-colors w-full">Start New Request</button>
         </div>
 
     </main>
 
     <div class="action-bar flex justify-between items-center gap-4" id="actionBar">
-        <button id="btnPrev" class="w-14 h-14 bg-gray-100 text-gray-600 rounded-2xl hover:bg-gray-200 transition-colors invisible flex items-center justify-center shrink-0" onclick="navigate(-1)">
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        
-        <button id="btnNext" class="flex-1 h-14 bg-primary text-white font-extrabold uppercase tracking-widest rounded-2xl shadow-md hover:bg-gray-800 transition-colors flex justify-center items-center" onclick="navigate(1)">
-            Next Step <i class="fa-solid fa-chevron-right ml-3 text-sm"></i>
-        </button>
-        
-        <button id="btnSubmit" class="flex-1 h-14 bg-accent text-primary font-extrabold uppercase tracking-widest rounded-2xl shadow-md hover:bg-accentDark transition-colors hidden justify-center items-center" onclick="submitOrder()">
-            Request Quote <i class="fa-solid fa-paper-plane ml-3 text-sm"></i>
-        </button>
+        <button id="btnPrev" class="w-14 h-14 bg-gray-100 text-gray-600 rounded-2xl hover:bg-gray-200 transition-colors invisible flex items-center justify-center shrink-0" onclick="goBack()"><i class="fa-solid fa-chevron-left"></i></button>
+        <button id="btnNext" class="flex-1 h-14 bg-primary text-white font-extrabold uppercase tracking-widest rounded-2xl shadow-md hover:bg-gray-800 transition-colors flex justify-center items-center" onclick="handleSelection(currentStep)">Next Step <i class="fa-solid fa-chevron-right ml-3 text-sm"></i></button>
+        <button id="btnSubmit" class="flex-1 h-14 bg-accent text-primary font-extrabold uppercase tracking-widest rounded-2xl shadow-md hover:bg-accentDark transition-colors hidden justify-center items-center" onclick="submitOrder()">Request Quote <i class="fa-solid fa-paper-plane ml-3 text-sm"></i></button>
     </div>
 
     <div id="garmentModal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl transform scale-95 transition-transform duration-300" id="garmentModalContent">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="garmentModalContent">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-extrabold uppercase tracking-tight" id="modalGarmentTitle">Configure</h3>
                 <button type="button" onclick="closeGarmentModal()" class="text-gray-400 hover:text-gray-900 transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
-            
-            <div id="modalFitContainer" class="mb-6">
-                <h4 class="text-xs font-extrabold text-gray-900 uppercase tracking-wider mb-3">1. Fit / Gender</h4>
-                <div class="grid grid-cols-3 gap-2">
-                    <div>
-                        <input type="radio" name="modalFit" id="modFitMens" value="Men's" class="peer hidden" onchange="checkModalComplete()">
-                        <label for="modFitMens" class="block text-center p-3 border-2 border-transparent bg-gray-50 rounded-xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 shadow-sm transition-colors font-bold text-[10px] uppercase tracking-wider">Men's</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="modalFit" id="modFitWomens" value="Women's" class="peer hidden" onchange="checkModalComplete()">
-                        <label for="modFitWomens" class="block text-center p-3 border-2 border-transparent bg-gray-50 rounded-xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 shadow-sm transition-colors font-bold text-[10px] uppercase tracking-wider">Women's</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="modalFit" id="modFitUnisex" value="Unisex" class="peer hidden" onchange="checkModalComplete()">
-                        <label for="modFitUnisex" class="block text-center p-3 border-2 border-transparent bg-gray-50 rounded-xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 shadow-sm transition-colors font-bold text-[10px] uppercase tracking-wider">Unisex</label>
-                    </div>
-                </div>
+            <div id="modalStyleContainerWrapper" class="mb-4 hidden">
+                <h4 class="text-xs font-extrabold text-gray-900 uppercase tracking-wider mb-3">Garment Style</h4>
+                <div class="space-y-2" id="modalStyleOptions"></div>
             </div>
-
-            <div id="modalTierContainer" class="mb-2">
-                <h4 class="text-xs font-extrabold text-gray-900 uppercase tracking-wider mb-3">2. Garment Source</h4>
-                <div class="space-y-2">
-                    <div class="relative">
-                        <input type="radio" name="modalTier" id="modTierStandard" value="Standard Blank" class="peer hidden" onchange="checkModalComplete()">
-                        <label for="modTierStandard" class="flex flex-col p-3 border-2 border-transparent bg-gray-50 rounded-xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 transition-colors">
-                            <span class="font-extrabold text-xs uppercase tracking-wider">Standard Base</span>
-                        </label>
-                    </div>
-                    <div class="relative">
-                        <input type="radio" name="modalTier" id="modTierPremium" value="Premium Blank" class="peer hidden" onchange="checkModalComplete()">
-                        <label for="modTierPremium" class="flex flex-col p-3 border-2 border-transparent bg-gray-50 rounded-xl cursor-pointer peer-checked:bg-primary peer-checked:text-white transition-colors">
-                            <span class="font-extrabold text-xs uppercase tracking-wider">Premium Soft</span>
-                        </label>
-                    </div>
-                    <div class="relative">
-                        <input type="radio" name="modalTier" id="modTierSupplied" value="Customer Supplied" class="peer hidden" onchange="checkModalComplete()">
-                        <label for="modTierSupplied" class="flex flex-col p-3 border-2 border-transparent bg-gray-50 rounded-xl cursor-pointer peer-checked:bg-gray-800 peer-checked:text-white transition-colors">
-                            <span class="font-extrabold text-xs uppercase tracking-wider">I am providing my own</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div id="modalSuppliedWarning" class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-xl hidden animate-[fadeIn_0.3s_ease-in-out]">
-                <h4 class="text-yellow-800 font-extrabold text-[10px] uppercase tracking-widest mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Disclaimer</h4>
-                <p class="text-[10px] text-yellow-700 leading-relaxed font-medium">We are not responsible for replacement costs of customer-supplied items in the event of production failure.</p>
-            </div>
+            <p id="modalErrorText" class="text-red-500 font-semibold text-xs mt-3 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select a style.</p>
         </div>
     </div>
 
     <script>
         let currentStep = 1;
-        const totalSteps = 7; 
+        const totalSteps = 9; 
         
         let currentGarment = {
-            type: '',
-            fit: '', 
-            tier: '', 
-            color: '',
-            placements: [],
-            decorations: {}, 
-            artworkDetails: {}, 
-            sizes: { YS: 0, YM: 0, YL: 0, XS: 0, S: 0, M: 0, L: 0, XL: 0, '2XL': 0, '3XL': 0, '4XL': 0 },
+            department: '', category: '', type: '', subStyle: '', baseType: '', fit: '', tier: '', color: '', expressImage: '',
+            placements: [], decorations: {}, artworkDetails: {}, 
+            sizes: { XS: 0, S: 0, M: 0, L: 0, XL: 0, '2XL': 0, '3XL': 0, '4XL': 0, '5XL': 0, YS: 0, YM: 0, YL: 0 },
             totalQty: 0
         };
         
         let orderItems = []; 
         let customerInfo = { name: '', email: '', phone: '', notes: '', fulfillment: 'Pickup', address: '', eventDate: '', deliveryOption: 'Standard' };
 
+        const catalogData = {
+            "Men's": {
+                "Tops": [
+                    { id: "mT1", name: "T-Shirts", desc: "Crewnecks, V-Necks", icon: "fa-tshirt", baseType: "T-Shirt", styles: ["Standard Crewneck", "V-Neck", "Heavyweight Boxy Fit", "Pocket Tee"] },
+                    { id: "mT2", name: "Tank Tops & Sleeveless", desc: "Muscle, Stringers", icon: "fa-shirt", baseType: "Tank Top", styles: ["Standard Tank Top", "Muscle Tank", "Stringer"] },
+                    { id: "mT3", name: "Long Sleeves", desc: "Standard full arm", icon: "fa-shirt", baseType: "Long Sleeve" },
+                    { id: "mT4", name: "Polos & Button-Downs", desc: "Collared shirts", icon: "fa-user-tie", baseType: "Polo" },
+                    { id: "mT5", name: "Sweaters & Knits", desc: "Crewneck pullovers", icon: "fa-vest", baseType: "Sweater" },
+                    { id: "mT6", name: "Hoodies (Pullover)", desc: "Standard hoodies", icon: "fa-user-ninja", baseType: "Hoodie", styles: ["Standard Fleece", "Heavyweight", "Lightweight / French Terry"] },
+                    { id: "mT7", name: "Outerwear & Jackets", desc: "Zip hoodies, track jackets", icon: "fa-cloud-sun", baseType: "Zip-Up", styles: ["Full-Zip Hoodie", "Quarter-Zip", "Track Jacket", "Windbreaker"] }
+                ],
+                "Bottoms": [
+                    { id: "mB1", name: "Trousers & Sweats", desc: "Joggers, chinos", icon: "fa-grip-lines", baseType: "Pants", styles: ["Fleece Joggers", "Sweatpants", "Chino Pants"] },
+                    { id: "mB2", name: "Shorts", desc: "Athletic, denim", icon: "fa-stop", baseType: "Shorts", styles: ["Athletic / Mesh", "Fleece Shorts", "Chino Shorts"] }
+                ]
+            },
+            "Women's": {
+                "Tops": [
+                    { id: "wT1", name: "T-Shirts", desc: "Crewnecks, crop tops", icon: "fa-tshirt", baseType: "T-Shirt", styles: ["Standard Crewneck", "V-Neck", "Crop Top", "Oversized / Boxy"] },
+                    { id: "wT2", name: "Tank Tops & Sleeveless", desc: "Racerback, Tube Top", icon: "fa-shirt", baseType: "Tank Top", styles: ["Racerback Tank", "Muscle Tank", "Tube Top", "Spaghetti Strap", "Standard Tank Top"] },
+                    { id: "wT3", name: "Long Sleeves", desc: "Standard full arm", icon: "fa-shirt", baseType: "Long Sleeve" },
+                    { id: "wT4", name: "Polos & Blouses", desc: "Button-downs, collared", icon: "fa-user-tie", baseType: "Polo" },
+                    { id: "wT5", name: "Sweaters & Knits", desc: "Cardigans, pullovers", icon: "fa-vest", baseType: "Sweater" },
+                    { id: "wT6", name: "Hoodies (Pullover)", desc: "Standard hoodies", icon: "fa-user-ninja", baseType: "Hoodie", styles: ["Standard Fleece", "Cropped Hoodie", "Oversized Fit"] },
+                    { id: "wT7", name: "Outerwear & Jackets", desc: "Zip hoodies, coats", icon: "fa-cloud-sun", baseType: "Zip-Up", styles: ["Full-Zip Hoodie", "Quarter-Zip", "Track Jacket", "Windbreaker"] }
+                ],
+                "Bottoms": [
+                    { id: "wB1", name: "Trousers & Sweats", desc: "Joggers, leggings", icon: "fa-grip-lines", baseType: "Pants", styles: ["Leggings", "Fleece Joggers", "Sweatpants", "Wide-Leg Pants"] },
+                    { id: "wB2", name: "Shorts", desc: "Athletic, biker, denim", icon: "fa-stop", baseType: "Shorts", styles: ["Biker Shorts", "Athletic / Running", "Fleece Shorts"] }
+                ]
+            },
+            "Accessories": {
+                "Headwear": [
+                    { id: "aH1", name: "Hats & Caps", desc: "Snapbacks, truckers", icon: "fa-hat-wizard", baseType: "Hat/Cap", styles: ["Snapback", "Trucker Hat", "Dad Hat", "Fitted Cap", "5-Panel"] },
+                    { id: "aH2", name: "Beanies & Winter Hats", desc: "Knit caps", icon: "fa-hat-wizard", baseType: "Beanie", styles: ["Cuffed Beanie", "Slouch Beanie", "Pom Pom Beanie"] }
+                ],
+                "Bags & Packs": [
+                    { id: "aB1", name: "Bags", desc: "Totes, duffels, backpacks", icon: "fa-bag-shopping", baseType: "Bag", styles: ["Canvas Tote", "Duffel Bag", "Backpack", "Drawstring Bag"] }
+                ],
+                "Footwear & Other": [
+                    { id: "aF1", name: "Socks", desc: "Athletic, dress", icon: "fa-socks", baseType: "Socks", styles: ["Crew Socks", "Ankle Socks", "Knee-High"] }
+                ]
+            }
+        };
+
+        const suppliedBaseTypes = [
+            { name: "T-Shirt", icon: "fa-tshirt" }, { name: "Tank Top", icon: "fa-shirt" }, { name: "Long Sleeve", icon: "fa-shirt" },
+            { name: "Polo / Button-Down", icon: "fa-user-tie" }, { name: "Sweater", icon: "fa-vest" }, { name: "Pullover Hoodie", icon: "fa-user-ninja" },
+            { name: "Jacket / Zip-Up", icon: "fa-cloud-sun" }, { name: "Pants", icon: "fa-grip-lines" }, { name: "Shorts", icon: "fa-stop" },
+            { name: "Hat/Cap", icon: "fa-hat-wizard" }, { name: "Beanie", icon: "fa-hat-wizard" }, { name: "Bag", icon: "fa-bag-shopping" }, { name: "Socks", icon: "fa-socks" }
+        ];
+
+        const appColors = [
+            { name: "White", hex: "#ffffff", border: "#e5e7eb" }, { name: "Black", hex: "#1a1a1a", border: "transparent" },
+            { name: "Ash Gray", hex: "#d1d5db", border: "transparent" }, { name: "Charcoal", hex: "#4b5563", border: "transparent" },
+            { name: "Navy", hex: "#1e3a8a", border: "transparent" }, { name: "Royal", hex: "#2563eb", border: "transparent" },
+            { name: "Light Blue", hex: "#93c5fd", border: "transparent" }, { name: "Forest", hex: "#166534", border: "transparent" },
+            { name: "Kelly Green", hex: "#22c55e", border: "transparent" }, { name: "Maroon", hex: "#7f1d1d", border: "transparent" },
+            { name: "Red", hex: "#dc2626", border: "transparent" }, { name: "Orange", hex: "#ea580c", border: "transparent" },
+            { name: "Yellow", hex: "#eab308", border: "transparent" }, { name: "Sand", hex: "#d6d3d1", border: "transparent" },
+            { name: "Brown", hex: "#78350f", border: "transparent" }, { name: "Pink", hex: "#f472b6", border: "transparent" },
+            { name: "Purple", hex: "#9333ea", border: "transparent" }, { name: "Custom", hex: "url(#rainbow)", border: "transparent", isCustom: true }
+        ];
+
+        const placementGroups = {
+            'T-Shirt': ['Full Front', 'Front Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Left Short Sleeve', 'Right Short Sleeve'],
+            'Tank Top': ['Full Front', 'Front Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar'],
+            'Long Sleeve': ['Full Front', 'Front Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Left Long Sleeve', 'Right Long Sleeve'],
+            'Polo': ['Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Left Short Sleeve', 'Right Short Sleeve'],
+            'Sweater': ['Full Front', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Left Long Sleeve', 'Right Long Sleeve'],
+            'Hoodie': ['Full Front', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Left Long Sleeve', 'Right Long Sleeve', 'Hood (Left Side)', 'Hood (Right Side)'],
+            'Zip-Up': ['Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Left Long Sleeve', 'Right Long Sleeve'],
+            'Pants': ['Left Thigh (Front)', 'Right Thigh (Front)', 'Left Calf', 'Right Calf', 'Back Right Pocket'],
+            'Shorts': ['Left Front Leg', 'Right Front Leg', 'Back Right Pocket'],
+            'Hat/Cap': ['Front Center', 'Front Left', 'Front Right', 'Left Side', 'Right Side', 'Back Center', 'Back Arch (Over Strap)'],
+            'Beanie': ['Front Center', 'Front Left', 'Front Right', 'Back Center'],
+            'Bag': ['Front Center', 'Front Pocket'],
+            'Socks': ['Outer Ankle', 'Inner Ankle', 'Top of Foot']
+        };
+
+        const categoryIcons = { "Tops": "fa-shirt", "Bottoms": "fa-grip-lines", "Headwear": "fa-hat-wizard", "Bags & Packs": "fa-bag-shopping", "Footwear & Other": "fa-shoe-prints" };
+        let modalRequiresStyle = false;
+
         document.addEventListener("DOMContentLoaded", () => {
+            renderColorGrid();
+            renderExpressBaseTypes();
             updateUI();
             updateGlobalCartBadge();
         });
 
+        function renderColorGrid() {
+            const container = document.getElementById('colorOptions');
+            container.innerHTML = `<svg width="0" height="0"><defs><linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ef4444" /><stop offset="33%" stop-color="#eab308" /><stop offset="66%" stop-color="#3b82f6" /><stop offset="100%" stop-color="#9333ea" /></linearGradient></defs></svg>`;
+            appColors.forEach((c, i) => {
+                const bgStyle = c.isCustom ? `background: url(#rainbow); background-image: linear-gradient(45deg, #ef4444, #eab308, #3b82f6, #9333ea);` : `background-color: ${c.hex}; border-color: ${c.border};`;
+                const labelIcon = c.isCustom ? '<i class="fa-solid fa-plus text-white text-lg drop-shadow-md"></i>' : '';
+                container.innerHTML += `<div><input type="radio" name="garmentColor" id="color_${i}" value="${c.name}" class="color-radio" onchange="handleColorSelection()"><label for="color_${i}" style="${bgStyle}">${labelIcon}</label><span class="block text-[10px] font-bold tracking-wider uppercase text-center mt-2 text-gray-600 truncate w-14">${c.name}</span></div>`;
+            });
+        }
+
+        function renderExpressBaseTypes() {
+            const container = document.getElementById('expressBaseTypeGrid');
+            if(container.innerHTML !== '') return;
+            suppliedBaseTypes.forEach(item => {
+                const safeId = item.name.replace(/[^a-zA-Z0-9]/g, '');
+                let mapBase = item.name;
+                if(mapBase === 'Polo / Button-Down') mapBase = 'Polo';
+                if(mapBase === 'Pullover Hoodie') mapBase = 'Hoodie';
+                if(mapBase === 'Jacket / Zip-Up') mapBase = 'Zip-Up';
+
+                container.innerHTML += `<div><input type="radio" name="expressBaseType" id="exp_${safeId}" value="${mapBase}" data-label="${item.name}" class="card-radio" onchange="checkExpressProgression()"><label for="exp_${safeId}" style="padding: 0.75rem 0.25rem;"><i class="fa-solid ${item.icon} text-lg mb-1"></i><span class="block text-[9px] font-bold uppercase tracking-wider">${item.name}</span></label></div>`;
+            });
+        }
+
+        function getBreadcrumb(level) {
+            let parts = [];
+            if (currentGarment.department) parts.push(currentGarment.department === 'Customer Supplied' ? 'Supplied' : currentGarment.department);
+            if (currentGarment.department === 'Express') {
+                if (level >= 5 && currentGarment.baseType) parts.push(currentGarment.baseType);
+                return parts.map(p => `<span>${p}</span>`).join('<i class="fa-solid fa-chevron-right text-[8px] opacity-60 mt-[2px]"></i>');
+            }
+            if (level >= 3 && currentGarment.category && currentGarment.department !== 'Customer Supplied') parts.push(currentGarment.category);
+            if (level >= 4 && currentGarment.type) {
+                let name = currentGarment.department === 'Customer Supplied' ? currentGarment.baseType : currentGarment.type;
+                if (currentGarment.subStyle) name = currentGarment.subStyle; 
+                parts.push(name);
+            }
+            if (level >= 5 && currentGarment.color && currentGarment.department !== 'Customer Supplied') {
+                parts.push(currentGarment.color);
+            }
+            return parts.map(p => `<span>${p}</span>`).join('<i class="fa-solid fa-chevron-right text-[8px] opacity-60 mt-[2px]"></i>');
+        }
+
+        function getNextStep(current, direction) {
+            if (currentGarment.department === 'Customer Supplied' || currentGarment.department === 'Express') {
+                if (current === 2 && direction === 1) return 5; 
+                if (current === 5 && direction === -1) return 2;
+            }
+            return current + direction;
+        }
+
+        function goToStep(step) {
+            hideError(currentStep); document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep = step; document.getElementById(`step${currentStep}`).classList.add('active'); updateUI();
+        }
+
+        function goBack() { goToStep(getNextStep(currentStep, -1)); }
+
+        // Handles the decoupled color selection logic so Custom input box functions correctly
+        function handleColorSelection() {
+            const colRadio = document.querySelector('input[name="garmentColor"]:checked');
+            if (colRadio && colRadio.value === 'Custom') {
+                document.getElementById('customColorWrapper').classList.remove('hidden');
+                validateStep(4); // Run validation to clear errors, but do NOT auto-advance
+            } else {
+                document.getElementById('customColorWrapper').classList.add('hidden');
+                document.getElementById('customColorInput').value = '';
+                handleSelection(4); // Validate and auto-advance
+            }
+        }
+
+        // Checks if Express form is ready to jump forward
+        function checkExpressProgression() {
+            const baseTypeRadio = document.querySelector('input[name="expressBaseType"]:checked');
+            if (baseTypeRadio && currentGarment.expressImage) {
+                handleSelection(2);
+            } else {
+                validateStep(2);
+            }
+        }
+
+        function handleSelection(step) {
+            if (validateStep(step)) {
+                if (step === 1) {
+                    if (currentGarment.department === 'Customer Supplied' || currentGarment.department === 'Express') {
+                        setTimeout(() => goToStep(2), 350);
+                    } else {
+                        setTimeout(() => { renderCategories(); goToStep(2); }, 350);
+                    }
+                } 
+                else if (step === 2) {
+                    if (currentGarment.department === 'Customer Supplied' || currentGarment.department === 'Express') {
+                        setTimeout(() => goToStep(5), 350);
+                    } else {
+                        setTimeout(() => { renderItems(); goToStep(3); }, 350);
+                    }
+                }
+                else {
+                    setTimeout(() => { let next = getNextStep(currentStep, 1); goToStep(next); }, 350);
+                }
+            }
+        }
+
         function jumpToCart() {
-            if (currentStep >= 7) return; 
-            hideError(currentStep);
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            currentStep = 7;
-            document.getElementById(`step${currentStep}`).classList.add('active');
-            updateUI();
+            if (currentStep >= 9) return; 
+            hideError(currentStep); document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep = 9; document.getElementById(`step${currentStep}`).classList.add('active'); updateUI();
         }
 
         function updateGlobalCartBadge() {
-            const badge = document.getElementById('globalCartBadge');
-            if (!badge) return; 
-
+            const badge = document.getElementById('globalCartBadge'); if (!badge) return; 
             let totalQty = orderItems.reduce((sum, item) => sum + item.totalQty, 0);
             if (currentGarment.type && currentGarment.totalQty > 0) totalQty += currentGarment.totalQty;
-            
-            if (totalQty > 0) {
-                badge.innerText = totalQty;
-                badge.classList.remove('hidden');
+            if (totalQty > 0) { badge.innerText = totalQty; badge.classList.remove('hidden'); } else { badge.classList.add('hidden'); }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoryGrid'); container.innerHTML = '';
+            if (currentGarment.department === 'Customer Supplied') {
+                suppliedBaseTypes.forEach((item) => {
+                    const safeId = item.name.replace(/[^a-zA-Z0-9]/g, '');
+                    let mapBase = item.name;
+                    if(mapBase === 'Polo / Button-Down') mapBase = 'Polo';
+                    if(mapBase === 'Pullover Hoodie') mapBase = 'Hoodie';
+                    if(mapBase === 'Jacket / Zip-Up') mapBase = 'Zip-Up';
+                    container.innerHTML += `<div><input type="radio" name="category" id="sup_${safeId}" value="${mapBase}" data-label="${item.name}" class="card-radio" onchange="handleSelection(2)"><label for="sup_${safeId}"><div class="w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center shadow-sm mb-3 shrink-0"><i class="fa-solid ${item.icon} text-xl"></i></div><span class="block text-sm font-bold uppercase tracking-wider">${item.name}</span></label></div>`;
+                });
             } else {
-                badge.classList.add('hidden');
+                const cats = catalogData[currentGarment.department];
+                for (let cat in cats) {
+                    const icon = categoryIcons[cat] || "fa-layer-group"; const safeCat = cat.replace(/\s+/g, '');
+                    container.innerHTML += `<div><input type="radio" name="category" id="cat_${safeCat}" value="${cat}" class="card-radio" onchange="handleSelection(2)"><label for="cat_${safeCat}"><div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0"><i class="fa-solid ${icon} text-xl"></i></div><span class="block text-sm font-bold uppercase tracking-wider">${cat}</span></label></div>`;
+                }
             }
         }
 
-        // --- NEW MODAL LOGIC START ---
-        function openGarmentModal(itemType) {
-            currentGarment.type = itemType;
-            
-            const modal = document.getElementById('garmentModal');
-            const modalContent = document.getElementById('garmentModalContent');
-            document.getElementById('modalGarmentTitle').innerText = itemType;
-            
-            const noFitItems = ['Hat/Cap', 'Socks', 'Bags & Accessories'];
-            const fitContainer = document.getElementById('modalFitContainer');
-            
-            // Reset existing radio selections in modal
-            document.querySelectorAll('input[name="modalFit"]').forEach(el => el.checked = false);
-            document.querySelectorAll('input[name="modalTier"]').forEach(el => el.checked = false);
-            document.getElementById('modalSuppliedWarning').classList.add('hidden');
-            
-            currentGarment.tier = '';
-            
-            if (noFitItems.includes(itemType)) {
-                fitContainer.classList.add('hidden');
-                currentGarment.fit = 'Unisex'; 
+        function renderItems() {
+            const dept = currentGarment.department; const cat = currentGarment.category;
+            const items = catalogData[dept][cat]; const container = document.getElementById('itemGrid'); container.innerHTML = '';
+            items.forEach((item, index) => {
+                container.innerHTML += `<div><input type="radio" name="garmentType" id="item_${index}" value="${item.name}" class="card-radio" onclick="selectItem(${index})"><label for="item_${index}"><div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 text-primary shrink-0"><i class="fa-solid ${item.icon} text-xl"></i></div><span class="block text-sm font-bold uppercase tracking-wider">${item.name}</span><span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">${item.desc}</span></label></div>`;
+            });
+        }
+
+        function renderPlacements() {
+            let base = currentGarment.baseType;
+            if(base === 'Polo / Button-Down') base = 'Polo';
+            if(base === 'Pullover Hoodie') base = 'Hoodie';
+            if(base === 'Jacket / Zip-Up') base = 'Zip-Up';
+
+            const placements = placementGroups[base] ? [...placementGroups[base]] : [];
+            placements.push('Custom / See Notes');
+            const container = document.getElementById('placementOptions'); container.innerHTML = '';
+            placements.forEach((place) => {
+                const safeId = place.replace(/[^a-zA-Z0-9]/g, '');
+                const isChecked = currentGarment.placements.includes(place) ? 'checked' : '';
+                container.innerHTML += `<div><input type="checkbox" name="placement" id="place_${safeId}" value="${place}" class="card-checkbox" onchange="validateStep(5)" ${isChecked}><label for="place_${safeId}"><div class="w-full h-16 flex items-center justify-center mb-3 bg-white rounded-lg text-gray-400 shadow-sm border border-gray-100"><i class="fa-solid fa-crosshairs text-2xl"></i></div><span class="text-xs font-extrabold tracking-widest uppercase text-center leading-tight">${place}</span></label></div>`;
+            });
+        }
+
+        function selectItem(index) {
+            const dept = currentGarment.department; const cat = currentGarment.category;
+            const item = catalogData[dept][cat][index];
+            currentGarment.type = item.name; currentGarment.baseType = item.baseType;
+            currentGarment.subStyle = ''; currentGarment.tier = 'Standard';
+
+            if (item.styles && item.styles.length > 0) {
+                modalRequiresStyle = true; const styleOptions = document.getElementById('modalStyleOptions'); styleOptions.innerHTML = '';
+                item.styles.forEach((style) => {
+                    const safeId = style.replace(/[^a-zA-Z0-9]/g, '');
+                    styleOptions.innerHTML += `<div class="relative"><input type="radio" name="modalStyle" id="modStyle_${safeId}" value="${style}" class="style-radio" onchange="checkModalComplete()"><label for="modStyle_${safeId}">${style}</label></div>`;
+                });
+                document.getElementById('modalStyleContainerWrapper').classList.remove('hidden');
+                document.getElementById('modalErrorText').classList.add('hidden');
+                document.getElementById('modalGarmentTitle').innerText = item.name;
+                
+                const modal = document.getElementById('garmentModal');
+                modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); document.getElementById('garmentModalContent').classList.remove('scale-95'); }, 10);
             } else {
-                fitContainer.classList.remove('hidden');
-                currentGarment.fit = ''; 
+                modalRequiresStyle = false; setTimeout(() => { goToStep(getNextStep(3, 1)); }, 350);
             }
-            
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalContent.classList.remove('scale-95');
-            }, 10);
         }
 
         function closeGarmentModal() {
-            const modal = document.getElementById('garmentModal');
-            const modalContent = document.getElementById('garmentModalContent');
-            modal.classList.add('opacity-0');
-            modalContent.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            const modal = document.getElementById('garmentModal'); const modalContent = document.getElementById('garmentModalContent');
+            modal.classList.add('opacity-0'); modalContent.classList.add('scale-95'); setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
         function checkModalComplete() {
-            const noFitItems = ['Hat/Cap', 'Socks', 'Bags & Accessories'];
-            const needsFit = !noFitItems.includes(currentGarment.type);
-            
-            const fitInput = document.querySelector('input[name="modalFit"]:checked');
-            const tierInput = document.querySelector('input[name="modalTier"]:checked');
-            
-            if (tierInput) {
-                if (tierInput.value === 'Customer Supplied') {
-                    document.getElementById('modalSuppliedWarning').classList.remove('hidden');
-                } else {
-                    document.getElementById('modalSuppliedWarning').classList.add('hidden');
-                }
-            }
-            
-            const isFitComplete = !needsFit || (needsFit && fitInput);
-            const isTierComplete = !!tierInput;
-            
-            if (isFitComplete && isTierComplete) {
-                if (needsFit) currentGarment.fit = fitInput.value;
-                currentGarment.tier = tierInput.value;
-                
-                setTimeout(() => {
-                    closeGarmentModal();
-                    if(currentStep === 1) navigate(1); 
-                }, 400); 
+            document.getElementById('modalErrorText').classList.add('hidden');
+            const styleInput = document.querySelector('input[name="modalStyle"]:checked');
+            if (styleInput) {
+                currentGarment.subStyle = styleInput.value;
+                setTimeout(() => { closeGarmentModal(); goToStep(getNextStep(3, 1)); }, 350); 
             }
         }
-        // --- NEW MODAL LOGIC END ---
+
+        function handleExpressFile(input) {
+            if (input.files && input.files[0]) {
+                currentGarment.expressImage = input.files[0].name;
+                document.getElementById('expressFileName').innerHTML = `<span class="text-pink-500">${input.files[0].name}</span>`;
+                checkExpressProgression();
+            }
+        }
 
         function toggleAddressField() {
             const isShipping = document.getElementById('fulShipping').checked;
             const container = document.getElementById('addressContainer');
-            if (isShipping) {
-                container.classList.remove('hidden');
-            } else {
-                container.classList.add('hidden');
-            }
-            validateStep(7);
-        }
-
-        function navigate(direction) {
-            if (direction === 1 && !validateStep(currentStep)) {
-                showError(currentStep);
-                return;
-            }
-            
-            hideError(currentStep);
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            currentStep += direction;
-            document.getElementById(`step${currentStep}`).classList.add('active');
-            updateUI();
-        }
-
-        function updatePlacementVisibility() {
-            const type = currentGarment.type;
-            
-            const visibilityMap = {
-                placeFullFront: true, placeFrontChest: true, placeLeftChest: true,
-                placeFullBack: true, placeUpperBack: true, placeBackCollar: true,
-                placeShortSleeve: true, placeLongSleeve: true,
-                placeHatFront: false, placeHatFrontLeft: false, 
-                placeHatRight: false, placeHatBack: false,
-                placeLeftLeg: false, placeRightLeg: false,
-                placeCustom: false
-            };
-
-            if (type === 'T-Shirt') {
-                visibilityMap.placeLongSleeve = false;
-            } else if (type === 'Long Sleeve' || type === 'Sweater') {
-                visibilityMap.placeShortSleeve = false;
-            } else if (type === 'Hoodie') {
-                visibilityMap.placeShortSleeve = false;
-                visibilityMap.placeBackCollar = false;
-            } else if (type === 'Team Apparel') {
-                visibilityMap.placeLongSleeve = false; 
-                visibilityMap.placeCustom = true; 
-            } else if (type === 'Hat/Cap') {
-                for (let key in visibilityMap) { visibilityMap[key] = false; }
-                visibilityMap.placeHatFront = true; visibilityMap.placeHatFrontLeft = true;
-                visibilityMap.placeHatRight = true; visibilityMap.placeHatBack = true;
-            } else if (type === 'Pants') {
-                for (let key in visibilityMap) { visibilityMap[key] = false; } 
-                visibilityMap.placeLeftLeg = true;
-                visibilityMap.placeRightLeg = true;
-                visibilityMap.placeCustom = true; 
-            } else if (type === 'Socks' || type === 'Bags & Accessories') {
-                for (let key in visibilityMap) { visibilityMap[key] = false; }
-                visibilityMap.placeCustom = true;
-            }
-
-            for (const [id, isVisible] of Object.entries(visibilityMap)) {
-                const checkbox = document.getElementById(id);
-                if (checkbox) {
-                    const parentDiv = checkbox.closest('div');
-                    if (isVisible) {
-                        parentDiv.classList.remove('hidden');
-                    } else {
-                        parentDiv.classList.add('hidden');
-                        checkbox.checked = false;
-                    }
-                }
-            }
+            if (isShipping) container.classList.remove('hidden'); else container.classList.add('hidden');
+            validateStep(9);
         }
 
         function updateUI() {
@@ -927,324 +613,193 @@
             const progress = (currentStep / totalSteps) * 100;
             document.getElementById('progressBar').style.width = `${progress}%`;
             
-            const btnPrev = document.getElementById('btnPrev');
-            const btnNext = document.getElementById('btnNext');
-            const btnSubmit = document.getElementById('btnSubmit');
-            const actionBar = document.getElementById('actionBar');
+            const btnPrev = document.getElementById('btnPrev'); const btnNext = document.getElementById('btnNext');
+            const btnSubmit = document.getElementById('btnSubmit'); const actionBar = document.getElementById('actionBar');
+
+            if (currentStep >= 2 && currentStep <= 8) {
+                const bcEl = document.getElementById(`bcStep${currentStep}`); if (bcEl) bcEl.innerHTML = getBreadcrumb(currentStep);
+            }
             
-            if (currentStep === 1) btnPrev.classList.add('invisible');
-            else btnPrev.classList.remove('invisible');
+            if (currentStep === 1) btnPrev.classList.add('invisible'); else btnPrev.classList.remove('invisible');
             
             if (currentStep === totalSteps) {
-                btnNext.classList.add('hidden');
-                btnSubmit.classList.remove('hidden');
-                btnSubmit.classList.add('flex');
-                renderOrderSummary();
+                btnNext.classList.add('hidden'); btnSubmit.classList.remove('hidden'); btnSubmit.classList.add('flex'); renderOrderSummary();
             } else {
-                btnNext.classList.remove('hidden');
-                btnNext.classList.add('flex');
-                btnSubmit.classList.add('hidden');
-                btnSubmit.classList.remove('flex');
+                btnNext.classList.remove('hidden'); btnNext.classList.add('flex'); btnSubmit.classList.add('hidden'); btnSubmit.classList.remove('flex');
                 btnNext.innerHTML = 'Next Step <i class="fa-solid fa-chevron-right ml-3 text-sm"></i>';
             }
 
             if(currentStep > totalSteps) {
-                 actionBar.classList.add('hidden');
-                 document.getElementById('stepIndicatorContainer').classList.add('hidden');
-                 document.getElementById('progressBarContainer').classList.add('hidden');
-                 document.getElementById('globalCartBtn').classList.add('hidden');
+                 actionBar.classList.add('hidden'); document.getElementById('stepIndicatorContainer').classList.add('hidden');
+                 document.getElementById('progressBarContainer').classList.add('hidden'); document.getElementById('globalCartBtn').classList.add('hidden');
             } else {
-                 document.getElementById('stepIndicatorContainer').classList.remove('hidden');
-                 document.getElementById('progressBarContainer').classList.remove('hidden');
+                 document.getElementById('stepIndicatorContainer').classList.remove('hidden'); document.getElementById('progressBarContainer').classList.remove('hidden');
                  document.getElementById('globalCartBtn').classList.remove('hidden');
             }
-            
-           if (currentStep === 2) {
-                const fitPrefix = currentGarment.fit && currentGarment.fit !== 'Unisex' ? currentGarment.fit + ' ' : '';
-                document.getElementById('selectedGarmentLabel').innerText = fitPrefix + (currentGarment.type || "Garment");
+
+            if (currentStep === 2) {
+                if (currentGarment.department === 'Express') {
+                    document.getElementById('step2Heading').innerText = "Express Upload";
+                    document.getElementById('step2Desc').innerText = "Upload an image of the exact item you want and select its base type.";
+                    document.getElementById('categoryGrid').classList.add('hidden');
+                    document.getElementById('expressGrid').classList.remove('hidden');
+                } else {
+                    document.getElementById('step2Heading').innerText = currentGarment.department === 'Customer Supplied' ? "Item Type" : "Category";
+                    document.getElementById('step2Desc').innerText = currentGarment.department === 'Customer Supplied' ? "What type of item are you supplying?" : "Select a category.";
+                    document.getElementById('categoryGrid').classList.remove('hidden');
+                    document.getElementById('expressGrid').classList.add('hidden');
+                    renderCategories();
+                }
             }
             
-            if (currentStep === 3) {
-                document.getElementById('placementHeading').innerText = (currentGarment.type || "Garment") + " Placements";
-                updatePlacementVisibility();
+            if (currentStep === 4) {
+                const colRadio = document.querySelector('input[name="garmentColor"]:checked');
+                if (colRadio && colRadio.value === 'Custom') document.getElementById('customColorWrapper').classList.remove('hidden');
+                else document.getElementById('customColorWrapper').classList.add('hidden');
             }
 
-            if (currentStep === 6) updateCurrentItemSummary();
+            if (currentStep === 5) renderPlacements();
+            if (currentStep === 8) updateCurrentItemSummary();
         }
 
         function validateStep(step) {
             let isValid = true;
             switch(step) {
                 case 1:
-                    if (currentGarment.type && currentGarment.tier && (currentGarment.fit || ['Hat/Cap', 'Socks', 'Bags & Accessories'].includes(currentGarment.type))) {
-                        isValid = true;
-                        document.getElementById('errorStep1_Type').classList.add('hidden');
-                    } else {
-                        isValid = false;
-                        document.getElementById('errorStep1_Type').classList.remove('hidden');
-                    }
+                    const deptEle = document.querySelector('input[name="department"]:checked');
+                    if (deptEle) {
+                        currentGarment.department = deptEle.value;
+                        currentGarment.fit = ['Men\'s', 'Women\'s'].includes(currentGarment.department) ? currentGarment.department : 'Unisex';
+                        hideError(1);
+                    } else { isValid = false; showError(1); }
                     break;
                 case 2:
-                    if (document.querySelector('input[name="garmentColor"]:checked')) { currentGarment.color = document.querySelector('input[name="garmentColor"]:checked').value; hideError(2); } else { isValid = false; }
+                    if (currentGarment.department === 'Express') {
+                        const baseTypeRadio = document.querySelector('input[name="expressBaseType"]:checked');
+                        const hasImage = !!currentGarment.expressImage;
+                        if (baseTypeRadio && hasImage) {
+                            currentGarment.baseType = baseTypeRadio.value;
+                            currentGarment.type = 'Custom ' + baseTypeRadio.dataset.label;
+                            currentGarment.tier = 'Standard'; currentGarment.color = 'See Image';
+                            currentGarment.fit = 'Unisex'; currentGarment.subStyle = '';
+                            hideError(2);
+                        } else { isValid = false; showError(2); }
+                    } else {
+                        const catEle = document.querySelector('input[name="category"]:checked');
+                        if (catEle) {
+                            if (currentGarment.department === 'Customer Supplied') {
+                                currentGarment.baseType = catEle.value; currentGarment.type = 'Supplied ' + catEle.dataset.label;
+                                currentGarment.tier = 'Customer Supplied'; currentGarment.color = 'Supplied Item';
+                                currentGarment.fit = 'Unisex'; currentGarment.subStyle = '';
+                            } else { currentGarment.category = catEle.value; }
+                            hideError(2);
+                        } else { isValid = false; showError(2); }
+                    }
                     break;
                 case 3:
-                    const placements = document.querySelectorAll('input[name="placement"]:checked');
-                    if (placements.length > 0) {
-                        currentGarment.placements = Array.from(placements).map(cb => cb.value);
-                        renderDecorationOptions(); 
-                        hideError(3);
-                    } else { isValid = false; }
+                    if (currentGarment.type && currentGarment.tier) { 
+                        if(modalRequiresStyle && !currentGarment.subStyle) { isValid = false; document.getElementById('modalErrorText').classList.remove('hidden'); document.getElementById('garmentModal').classList.remove('hidden'); document.getElementById('garmentModalContent').classList.remove('scale-95'); document.getElementById('garmentModal').classList.remove('opacity-0'); } 
+                        else { hideError(3); }
+                    } else { isValid = false; showError(3); }
                     break;
                 case 4:
-                    let allMethodsSelected = true;
-                    currentGarment.placements.forEach(place => {
-                        const safeId = place.replace(/\s+/g, '');
-                        const method = document.querySelector(`input[name="dec_${safeId}"]:checked`);
-                        if (method) currentGarment.decorations[place] = method.value;
-                        else allMethodsSelected = false;
-                    });
-                    if (allMethodsSelected) { 
-                        renderArtworkOptions(); 
-                        hideError(4); 
+                    const colRadio = document.querySelector('input[name="garmentColor"]:checked');
+                    if (colRadio) { 
+                        if (colRadio.value === 'Custom') {
+                            const customVal = document.getElementById('customColorInput').value.trim();
+                            if (customVal) { currentGarment.color = customVal; hideError(4); } else { isValid = false; showError(4); }
+                        } else { currentGarment.color = colRadio.value; hideError(4); }
                     } else { isValid = false; }
                     break;
-                case 5: 
-                    let allArtworkProvided = true;
-                    currentGarment.placements.forEach(place => {
-                        const safeId = place.replace(/\s+/g, '');
-                        const method = currentGarment.decorations[place];
-                        
-                        const toggleEle = document.querySelector(`input[name="artToggle_${safeId}"]:checked`);
-                        if(!toggleEle) { allArtworkProvided = false; return; }
-
-                        const artType = toggleEle.value;
-                        const notes = document.getElementById(`notes_${safeId}`).value.trim();
-                        const needsUpgrade = document.getElementById(`upgrade_${safeId}`) ? document.getElementById(`upgrade_${safeId}`).checked : false;
-                        
-                        let isDigitized = null;
-                        if (method === 'Embroidery') {
-                            const digiRadio = document.querySelector(`input[name="digitized_${safeId}"]:checked`);
-                            if (digiRadio) {
-                                isDigitized = digiRadio.value;
-                            } else {
-                                allArtworkProvided = false; 
-                            }
-                        }
-
-                        let data = { type: artType, notes: notes, content: null, needsUpgrade: needsUpgrade, isDigitized: isDigitized };
-                        
-                        if (artType === 'file') {
-                            const fileLabel = document.getElementById(`fileName_${safeId}`).innerText;
-                            if (fileLabel === 'Tap to select file' || fileLabel === '') {
-                                allArtworkProvided = false; 
-                            } else {
-                                data.content = fileLabel;
-                            }
-                        } else {
-                            const textVal = document.getElementById(`textVal_${safeId}`).value.trim();
-                            if (textVal === '') allArtworkProvided = false; 
-                            else data.content = textVal;
-                        }
-                        
-                        if (allArtworkProvided) currentGarment.artworkDetails[place] = data;
-                    });
-                    if (allArtworkProvided) { hideError(5); } else { isValid = false; }
+                case 5:
+                    const placements = document.querySelectorAll('input[name="placement"]:checked');
+                    if (placements.length > 0) { currentGarment.placements = Array.from(placements).map(cb => cb.value); renderDecorationOptions(); hideError(5); } else { isValid = false; }
                     break;
                 case 6:
-                    if (currentGarment.totalQty > 0) { hideError(6); updateCurrentItemSummary(); } else { isValid = false; updateCurrentItemSummary(); }
+                    let allMethodsSelected = true;
+                    currentGarment.placements.forEach(place => { const safeId = place.replace(/[^a-zA-Z0-9]/g, ''); const method = document.querySelector(`input[name="dec_${safeId}"]:checked`); if (method) currentGarment.decorations[place] = method.value; else allMethodsSelected = false; });
+                    if (allMethodsSelected) { renderArtworkOptions(); hideError(6); } else { isValid = false; }
                     break;
-                case 7:
-                    const name = document.getElementById('customerName').value.trim();
-                    const email = document.getElementById('customerEmail').value.trim();
-                    const phone = document.getElementById('customerPhone').value.trim();
-                    const termsCheck = document.getElementById('termsCheck').checked;
-                    const isShipping = document.getElementById('fulShipping').checked;
-                    const address = document.getElementById('shippingAddress').value.trim();
-
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    
-                    let contactValid = name && emailRegex.test(email) && phone && termsCheck;
-                    let shippingValid = isShipping ? address.length > 0 : true;
-
+                case 7: 
+                    let allArtworkProvided = true;
+                    currentGarment.placements.forEach(place => {
+                        const safeId = place.replace(/[^a-zA-Z0-9]/g, ''); const method = currentGarment.decorations[place]; const toggleEle = document.querySelector(`input[name="artToggle_${safeId}"]:checked`);
+                        if(!toggleEle) { allArtworkProvided = false; return; }
+                        const artType = toggleEle.value; const notes = document.getElementById(`notes_${safeId}`).value.trim(); const needsUpgrade = document.getElementById(`upgrade_${safeId}`) ? document.getElementById(`upgrade_${safeId}`).checked : false;
+                        let isDigitized = null;
+                        if (method === 'Embroidery') { const digiRadio = document.querySelector(`input[name="digitized_${safeId}"]:checked`); if (digiRadio) { isDigitized = digiRadio.value; } else { allArtworkProvided = false; } }
+                        let data = { type: artType, notes: notes, content: null, needsUpgrade: needsUpgrade, isDigitized: isDigitized };
+                        if (artType === 'file') { const fileLabel = document.getElementById(`fileName_${safeId}`).innerText; if (fileLabel === 'Tap to select file' || fileLabel === '') { allArtworkProvided = false; } else { data.content = fileLabel; } } else { const textVal = document.getElementById(`textVal_${safeId}`).value.trim(); if (textVal === '') allArtworkProvided = false; else data.content = textVal; }
+                        if (allArtworkProvided) currentGarment.artworkDetails[place] = data;
+                    });
+                    if (allArtworkProvided) { hideError(7); } else { isValid = false; }
+                    break;
+                case 8:
+                    if (currentGarment.totalQty > 0) { hideError(8); updateCurrentItemSummary(); } else { isValid = false; updateCurrentItemSummary(); }
+                    break;
+                case 9:
+                    const name = document.getElementById('customerName').value.trim(); const email = document.getElementById('customerEmail').value.trim(); const phone = document.getElementById('customerPhone').value.trim();
+                    const termsCheck = document.getElementById('termsCheck').checked; const isShipping = document.getElementById('fulShipping').checked; const address = document.getElementById('shippingAddress').value.trim();
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; let contactValid = name && emailRegex.test(email) && phone && termsCheck; let shippingValid = isShipping ? address.length > 0 : true;
                     if (contactValid && shippingValid) {
-                        customerInfo.name = name; 
-                        customerInfo.email = email; 
-                        customerInfo.phone = phone;
-                        customerInfo.notes = document.getElementById('orderNotes').value.trim();
-                        customerInfo.deliveryOption = document.querySelector('input[name="deliveryOption"]:checked').value;
-                        customerInfo.fulfillment = isShipping ? 'Shipping' : 'Pickup';
-                        customerInfo.address = isShipping ? address : '';
-                        customerInfo.eventDate = document.getElementById('eventDate').value;
-
-                        hideError(7);
-                        const hasCurrentItem = currentGarment.type && currentGarment.totalQty > 0;
-                        if(orderItems.length === 0 && !hasCurrentItem) isValid = false;
-                    } else { 
-                        isValid = false; 
-                    }
+                        customerInfo.name = name; customerInfo.email = email; customerInfo.phone = phone; customerInfo.notes = document.getElementById('orderNotes').value.trim();
+                        customerInfo.deliveryOption = document.querySelector('input[name="deliveryOption"]:checked').value; customerInfo.fulfillment = isShipping ? 'Shipping' : 'Pickup'; customerInfo.address = isShipping ? address : ''; customerInfo.eventDate = document.getElementById('eventDate').value;
+                        hideError(9); const hasCurrentItem = currentGarment.type && currentGarment.totalQty > 0; if(orderItems.length === 0 && !hasCurrentItem) isValid = false;
+                    } else { isValid = false; }
                     break;
             }
             return isValid;
         }
 
         function renderDecorationOptions() {
-            const container = document.getElementById('decorationOptionsContainer');
-            container.innerHTML = ''; 
+            const container = document.getElementById('decorationOptionsContainer'); container.innerHTML = ''; 
             currentGarment.placements.forEach(place => {
-                const safeId = place.replace(/\s+/g, '');
-                const existing = currentGarment.decorations[place];
-                container.innerHTML += `
-                    <div class="bg-gray-50 rounded-3xl p-5 border border-gray-200">
-                        <h3 class="font-extrabold text-gray-900 mb-3 uppercase tracking-widest text-sm">${place}</h3>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="relative">
-                                <input type="radio" name="dec_${safeId}" id="dec_${safeId}_print" value="Print" class="peer hidden" ${existing === 'Print' ? 'checked' : ''} onchange="validateStep(4)">
-                                <label for="dec_${safeId}_print" class="flex flex-col items-center justify-center p-4 border-2 border-transparent bg-white rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 shadow-sm transition-colors text-center">
-                                    <i class="fa-solid fa-print mb-2 text-2xl text-gray-400 peer-checked:text-gray-900"></i>
-                                    <span class="font-bold text-sm uppercase tracking-wider">Print</span>
-                                </label>
-                            </div>
-                            <div class="relative">
-                                <input type="radio" name="dec_${safeId}" id="dec_${safeId}_embroidery" value="Embroidery" class="peer hidden" ${existing === 'Embroidery' ? 'checked' : ''} onchange="validateStep(4)">
-                                <label for="dec_${safeId}_embroidery" class="flex flex-col items-center justify-center p-4 border-2 border-transparent bg-white rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 shadow-sm transition-colors text-center">
-                                    <i class="fa-solid fa-wand-magic-sparkles mb-2 text-2xl text-gray-400 peer-checked:text-gray-900"></i>
-                                    <span class="font-bold text-sm uppercase tracking-wider">Embroidery</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>`;
+                const safeId = place.replace(/[^a-zA-Z0-9]/g, ''); const existing = currentGarment.decorations[place];
+                container.innerHTML += `<div class="bg-gray-50 rounded-3xl p-5 border border-gray-200"><h3 class="font-extrabold text-gray-900 mb-3 uppercase tracking-widest text-sm">${place}</h3><div class="grid grid-cols-2 gap-3"><div class="relative"><input type="radio" name="dec_${safeId}" id="dec_${safeId}_print" value="Print" class="peer hidden" ${existing === 'Print' ? 'checked' : ''} onchange="validateStep(6)"><label for="dec_${safeId}_print" class="flex flex-col items-center justify-center p-4 border-2 border-transparent bg-white rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 shadow-sm transition-colors text-center"><i class="fa-solid fa-print mb-2 text-2xl text-gray-400 peer-checked:text-gray-900"></i><span class="font-bold text-sm uppercase tracking-wider">Print</span></label></div><div class="relative"><input type="radio" name="dec_${safeId}" id="dec_${safeId}_embroidery" value="Embroidery" class="peer hidden" ${existing === 'Embroidery' ? 'checked' : ''} onchange="validateStep(6)"><label for="dec_${safeId}_embroidery" class="flex flex-col items-center justify-center p-4 border-2 border-transparent bg-white rounded-2xl cursor-pointer peer-checked:bg-accent peer-checked:text-gray-900 shadow-sm transition-colors text-center"><i class="fa-solid fa-wand-magic-sparkles mb-2 text-2xl text-gray-400 peer-checked:text-gray-900"></i><span class="font-bold text-sm uppercase tracking-wider">Embroidery</span></label></div></div></div>`;
             });
         }
 
         function renderArtworkOptions() {
-            const container = document.getElementById('artworkDetailsContainer');
-            container.innerHTML = '';
-            
+            const container = document.getElementById('artworkDetailsContainer'); container.innerHTML = '';
             currentGarment.placements.forEach(place => {
-                const safeId = place.replace(/\s+/g, '');
-                const method = currentGarment.decorations[place];
+                const safeId = place.replace(/[^a-zA-Z0-9]/g, ''); const method = currentGarment.decorations[place];
                 const existingArt = currentGarment.artworkDetails[place] || { type: 'file', content: '', notes: '', needsUpgrade: false, isDigitized: null };
-                
-                const isFile = existingArt.type === 'file';
-                const fileClass = isFile ? 'bg-white shadow-sm text-primary' : 'text-gray-500 hover:text-gray-700';
-                const textClass = !isFile ? 'bg-white shadow-sm text-primary' : 'text-gray-500 hover:text-gray-700';
-
-                let digitizingHtml = '';
-                let upgradeHtml = '';
+                const isFile = existingArt.type === 'file'; const fileClass = isFile ? 'bg-white shadow-sm text-primary' : 'text-gray-500 hover:text-gray-700'; const textClass = !isFile ? 'bg-white shadow-sm text-primary' : 'text-gray-500 hover:text-gray-700';
+                let digitizingHtml = ''; let upgradeHtml = '';
 
                 if (method === 'Embroidery') {
-                    digitizingHtml = `
-                        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl">
-                            <p class="text-[11px] text-indigo-800 font-extrabold mb-3 leading-tight uppercase tracking-wide"><i class="fa-solid fa-circle-info mr-1"></i> Digitizing Required</p>
-                            <p class="text-xs text-indigo-700 mb-3 font-medium">Embroidery machines require a digitized file (machine code), not just a standard image. Do you have this file for this specific size?</p>
-                            <div class="flex flex-col space-y-3">
-                                <label class="flex items-center space-x-3 text-sm text-gray-800 font-bold cursor-pointer">
-                                    <input type="radio" name="digitized_${safeId}" value="yes" class="accent-indigo-600 w-4 h-4" ${existingArt.isDigitized === 'yes' ? 'checked' : ''} onchange="validateStep(5)">
-                                    <span>Yes, it is already digitized / on file</span>
-                                </label>
-                                <label class="flex items-center space-x-3 text-sm text-gray-800 font-bold cursor-pointer">
-                                    <input type="radio" name="digitized_${safeId}" value="no" class="accent-indigo-600 w-4 h-4" ${existingArt.isDigitized === 'no' ? 'checked' : ''} onchange="validateStep(5)">
-                                    <span>No, please digitize my logo <span class="text-xs font-medium text-gray-500">(Setup rates apply)</span></span>
-                                </label>
-                            </div>
-                        </div>
-                    `;
+                    digitizingHtml = `<div class="mt-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl"><p class="text-[11px] text-indigo-800 font-extrabold mb-3 leading-tight uppercase tracking-wide"><i class="fa-solid fa-circle-info mr-1"></i> Digitizing Required</p><p class="text-xs text-indigo-700 mb-3 font-medium">Embroidery machines require a digitized file (machine code), not just a standard image. Do you have this file for this specific size?</p><div class="flex flex-col space-y-3"><label class="flex items-center space-x-3 text-sm text-gray-800 font-bold cursor-pointer"><input type="radio" name="digitized_${safeId}" value="yes" class="accent-indigo-600 w-4 h-4" ${existingArt.isDigitized === 'yes' ? 'checked' : ''} onchange="validateStep(7)"><span>Yes, it is already digitized / on file</span></label><label class="flex items-center space-x-3 text-sm text-gray-800 font-bold cursor-pointer"><input type="radio" name="digitized_${safeId}" value="no" class="accent-indigo-600 w-4 h-4" ${existingArt.isDigitized === 'no' ? 'checked' : ''} onchange="validateStep(7)"><span>No, please digitize my logo <span class="text-xs font-medium text-gray-500">(Setup rates apply)</span></span></label></div></div>`;
                 } else if (method === 'Print') {
-                    upgradeHtml = `
-                        <div class="bg-white border border-gray-200 shadow-sm rounded-xl p-4 mt-3">
-                            <p class="text-[11px] text-gray-500 font-semibold mb-3 leading-snug">
-                                <i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-1"></i> Images must be <strong>300 DPI</strong>. Low quality or AI-generated images typically require additional design work to be usable.
-                            </p>
-                            <label class="flex items-start space-x-3 text-sm text-gray-800 font-bold cursor-pointer">
-                                <input type="checkbox" id="upgrade_${safeId}" class="accent-primary w-4 h-4 mt-0.5" ${existingArt.needsUpgrade ? 'checked' : ''} onchange="validateStep(5)">
-                                <span>Artwork upgrading is required <span class="text-xs font-medium text-gray-500">(Rates apply)</span></span>
-                            </label>
-                        </div>
-                    `;
+                    upgradeHtml = `<div class="bg-white border border-gray-200 shadow-sm rounded-xl p-4 mt-3"><p class="text-[11px] text-gray-500 font-semibold mb-3 leading-snug"><i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-1"></i> Images must be <strong>300 DPI</strong>. Low quality or AI-generated images typically require additional design work to be usable.</p><label class="flex items-start space-x-3 text-sm text-gray-800 font-bold cursor-pointer"><input type="checkbox" id="upgrade_${safeId}" class="accent-primary w-4 h-4 mt-0.5" ${existingArt.needsUpgrade ? 'checked' : ''} onchange="validateStep(7)"><span>Artwork upgrading is required <span class="text-xs font-medium text-gray-500">(Rates apply)</span></span></label></div>`;
                 }
 
-                container.innerHTML += `
-                    <div class="bg-gray-50 rounded-3xl p-5 border border-gray-200">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-extrabold text-gray-900 uppercase tracking-widest text-sm">${place}</h3>
-                            <span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">${method}</span>
-                        </div>
-
-                        <div class="flex bg-gray-200 rounded-xl p-1 mb-4 relative">
-                            <input type="radio" name="artToggle_${safeId}" id="toggleFile_${safeId}" value="file" class="hidden" ${isFile ? 'checked' : ''}>
-                            <input type="radio" name="artToggle_${safeId}" id="toggleText_${safeId}" value="text" class="hidden" ${!isFile ? 'checked' : ''}>
-                            
-                            <label for="toggleFile_${safeId}" onclick="switchArtType('${safeId}', 'file')" id="lblFile_${safeId}" class="flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all ${fileClass}">Upload Artwork</label>
-                            <label for="toggleText_${safeId}" onclick="switchArtType('${safeId}', 'text')" id="lblText_${safeId}" class="flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all ${textClass}">Use Text</label>
-                        </div>
-
-                        <div id="boxFile_${safeId}" class="${isFile ? 'block' : 'hidden'} mb-4">
-                            <div class="file-drop-area rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-white mb-3" onclick="document.getElementById('fileInput_${safeId}').click()">
-                                <i class="fa-solid fa-cloud-arrow-up text-2xl text-primary mb-2"></i>
-                                <span class="text-xs font-bold text-gray-800 uppercase tracking-wider mb-2" id="fileName_${safeId}">${isFile && existingArt.content ? existingArt.content : 'Tap to select file'}</span>
-                                <span class="text-[10px] text-gray-400 font-bold tracking-wider uppercase">Preferred: .SVG, .AI</span>
-                                <span class="text-[10px] text-gray-400 font-semibold">(Also accepting .PNG, .JPG, .PDF)</span>
-                                <input type="file" id="fileInput_${safeId}" class="hidden" accept=".svg,.ai,.png,.jpg,.jpeg,.pdf" onchange="handleDynamicFile(this, '${safeId}')">
-                            </div>
-                            
-                            ${upgradeHtml}
-                        </div>
-
-                        <div id="boxText_${safeId}" class="${!isFile ? 'block' : 'hidden'} mb-4">
-                            <input type="text" id="textVal_${safeId}" value="${!isFile ? existingArt.content : ''}" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl font-medium focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Type text to be printed/embroidered..." oninput="validateStep(5)">
-                        </div>
-                        
-                        ${digitizingHtml}
-
-                        <textarea id="notes_${safeId}" rows="2" class="w-full mt-4 px-4 py-3 bg-white border border-gray-200 rounded-xl font-medium focus:border-primary outline-none transition-all placeholder-gray-400 text-sm" placeholder="Add specific instructions (e.g. dimensions, thread colors)...">${existingArt.notes}</textarea>
-                    </div>
-                `;
+                container.innerHTML += `<div class="bg-gray-50 rounded-3xl p-5 border border-gray-200"><div class="flex justify-between items-center mb-4"><h3 class="font-extrabold text-gray-900 uppercase tracking-widest text-sm">${place}</h3><span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">${method}</span></div><div class="flex bg-gray-200 rounded-xl p-1 mb-4 relative"><input type="radio" name="artToggle_${safeId}" id="toggleFile_${safeId}" value="file" class="hidden" ${isFile ? 'checked' : ''}><input type="radio" name="artToggle_${safeId}" id="toggleText_${safeId}" value="text" class="hidden" ${!isFile ? 'checked' : ''}><label for="toggleFile_${safeId}" onclick="switchArtType('${safeId}', 'file')" id="lblFile_${safeId}" class="flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all ${fileClass}">Upload Artwork</label><label for="toggleText_${safeId}" onclick="switchArtType('${safeId}', 'text')" id="lblText_${safeId}" class="flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all ${textClass}">Use Text</label></div><div id="boxFile_${safeId}" class="${isFile ? 'block' : 'hidden'} mb-4"><div class="file-drop-area rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-white mb-3" onclick="document.getElementById('fileInput_${safeId}').click()"><i class="fa-solid fa-cloud-arrow-up text-2xl text-primary mb-2"></i><span class="text-xs font-bold text-gray-800 uppercase tracking-wider mb-2" id="fileName_${safeId}">${isFile && existingArt.content ? existingArt.content : 'Tap to select file'}</span><span class="text-[10px] text-gray-400 font-bold tracking-wider uppercase">Preferred: .SVG, .AI</span><span class="text-[10px] text-gray-400 font-semibold">(Also accepting .PNG, .JPG, .PDF)</span><input type="file" id="fileInput_${safeId}" class="hidden" accept=".svg,.ai,.png,.jpg,.jpeg,.pdf" onchange="handleDynamicFile(this, '${safeId}')"></div>${upgradeHtml}</div><div id="boxText_${safeId}" class="${!isFile ? 'block' : 'hidden'} mb-4"><input type="text" id="textVal_${safeId}" value="${!isFile ? existingArt.content : ''}" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl font-medium focus:border-primary outline-none transition-all placeholder-gray-400" placeholder="Type text to be printed/embroidered..." oninput="validateStep(7)"></div>${digitizingHtml}<textarea id="notes_${safeId}" rows="2" class="w-full mt-4 px-4 py-3 bg-white border border-gray-200 rounded-xl font-medium focus:border-primary outline-none transition-all placeholder-gray-400 text-sm" placeholder="Add specific instructions (e.g. dimensions, thread colors)...">${existingArt.notes}</textarea></div>`;
             });
         }
 
         function switchArtType(safeId, type) {
-            const lblFile = document.getElementById(`lblFile_${safeId}`);
-            const lblText = document.getElementById(`lblText_${safeId}`);
-            const boxFile = document.getElementById(`boxFile_${safeId}`);
-            const boxText = document.getElementById(`boxText_${safeId}`);
-
+            const lblFile = document.getElementById(`lblFile_${safeId}`); const lblText = document.getElementById(`lblText_${safeId}`);
+            const boxFile = document.getElementById(`boxFile_${safeId}`); const boxText = document.getElementById(`boxText_${safeId}`);
             if (type === 'file') {
-                lblFile.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all bg-white shadow-sm text-primary";
-                lblText.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all text-gray-500 hover:text-gray-700";
-                boxFile.classList.remove('hidden');
-                boxText.classList.add('hidden');
+                lblFile.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all bg-white shadow-sm text-primary"; lblText.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all text-gray-500 hover:text-gray-700";
+                boxFile.classList.remove('hidden'); boxText.classList.add('hidden');
             } else {
-                lblText.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all bg-white shadow-sm text-primary";
-                lblFile.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all text-gray-500 hover:text-gray-700";
-                boxText.classList.remove('hidden');
-                boxFile.classList.add('hidden');
+                lblText.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all bg-white shadow-sm text-primary"; lblFile.className = "flex-1 text-center cursor-pointer text-xs font-bold uppercase py-2.5 rounded-lg transition-all text-gray-500 hover:text-gray-700";
+                boxText.classList.remove('hidden'); boxFile.classList.add('hidden');
             }
-            validateStep(5);
+            validateStep(7);
         }
 
-        function handleDynamicFile(input, safeId) {
-            if (input.files && input.files[0]) {
-                const fileName = input.files[0].name;
-                document.getElementById(`fileName_${safeId}`).innerHTML = `<span class="text-primary">${fileName}</span>`;
-                validateStep(5);
-            }
-        }
-
+        function handleDynamicFile(input, safeId) { if (input.files && input.files[0]) { document.getElementById(`fileName_${safeId}`).innerHTML = `<span class="text-primary">${input.files[0].name}</span>`; validateStep(7); } }
         function showError(step) { const e = document.getElementById(`errorStep${step}`); if (e) e.classList.remove('hidden'); }
         function hideError(step) { const e = document.getElementById(`errorStep${step}`); if (e) e.classList.add('hidden'); }
 
         function updateQty(size, change) {
-            let newVal = currentGarment.sizes[size] + change;
-            if (newVal < 0) newVal = 0;
-            currentGarment.sizes[size] = newVal;
-            document.getElementById(`qty-${size}`).value = newVal;
-            
-            let total = 0;
-            for (let s in currentGarment.sizes) total += currentGarment.sizes[s];
-            currentGarment.totalQty = total;
-            document.getElementById('totalQtyDisplay').innerText = total;
-            validateStep(6);
-            updateGlobalCartBadge();
+            let newVal = currentGarment.sizes[size] + change; if (newVal < 0) newVal = 0;
+            currentGarment.sizes[size] = newVal; document.getElementById(`qty-${size}`).value = newVal;
+            let total = 0; for (let s in currentGarment.sizes) total += currentGarment.sizes[s];
+            currentGarment.totalQty = total; document.getElementById('totalQtyDisplay').innerText = total;
+            validateStep(8); updateGlobalCartBadge();
         }
 
         function updateCurrentItemSummary() {
@@ -1255,8 +810,10 @@
 
                 const fitStr = currentGarment.fit && currentGarment.fit !== 'Unisex' ? currentGarment.fit + ' ' : '';
                 const tierBadge = currentGarment.tier === 'Customer Supplied' ? `<span class="bg-gray-800 text-white text-[9px] px-1.5 py-0.5 rounded ml-2 uppercase">Supplied</span>` : '';
+                const expressBadge = currentGarment.department === 'Express' ? `<span class="bg-pink-500 text-white text-[9px] px-1.5 py-0.5 rounded ml-2 uppercase"><i class="fa-solid fa-bolt mr-1"></i>Express Match</span>` : '';
+                const nameStr = currentGarment.subStyle ? currentGarment.subStyle : currentGarment.type;
 
-                summaryEl.innerHTML = `<div class="font-extrabold text-primary text-xl mb-2 flex items-center flex-wrap">${currentGarment.totalQty}x ${currentGarment.color} ${fitStr}${currentGarment.type} ${tierBadge}</div>
+                summaryEl.innerHTML = `<div class="font-extrabold text-primary text-xl mb-2 flex items-center flex-wrap">${currentGarment.totalQty}x ${currentGarment.color} ${fitStr}${nameStr} ${tierBadge}${expressBadge}</div>
                                        <div class="text-sm mb-1 uppercase tracking-wider"><strong>Sizes:</strong> ${sizeStr}</div>
                                        <div class="text-sm uppercase tracking-wider"><strong>Locations:</strong> ${placementsStr}</div>`;
                 document.getElementById('btnNext').innerHTML = 'Review Order <i class="fa-solid fa-chevron-right ml-3 text-sm"></i>';
@@ -1268,42 +825,34 @@
 
         function continueShoppingFromReview() {
             if (currentGarment.type && currentGarment.totalQty > 0) { orderItems.push(JSON.parse(JSON.stringify(currentGarment))); }
-            showToast("Item saved to cart!");
-            clearCurrentItemSilently();
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            currentStep = 1;
-            document.getElementById(`step${currentStep}`).classList.add('active');
-            updateUI();
+            showToast("Item saved to cart!"); clearCurrentItemSilently(); document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep = 1; document.getElementById(`step${currentStep}`).classList.add('active'); updateUI();
         }
 
         function renderOrderSummary() {
-            const listEl = document.getElementById('orderSummaryList');
-            const countEl = document.getElementById('itemCountBadge');
-            listEl.innerHTML = '';
-            
-            let allItems = [...orderItems];
-            if (currentGarment.type && currentGarment.totalQty > 0) allItems.push(currentGarment);
-            
+            const listEl = document.getElementById('orderSummaryList'); const countEl = document.getElementById('itemCountBadge'); listEl.innerHTML = '';
+            let allItems = [...orderItems]; if (currentGarment.type && currentGarment.totalQty > 0) allItems.push(currentGarment);
             countEl.innerText = allItems.reduce((sum, item) => sum + item.totalQty, 0);
             
             if (allItems.length === 0) {
-                listEl.innerHTML = '<li class="px-5 py-8 text-center text-gray-500 font-medium">Your cart is empty. <br><button onclick="currentStep=1; updateUI(); document.getElementById(\'step7\').classList.remove(\'active\'); document.getElementById(\'step1\').classList.add(\'active\');" class="text-pink-500 font-bold uppercase tracking-widest mt-4">Go back</button></li>';
-                return;
+                listEl.innerHTML = '<li class="px-5 py-8 text-center text-gray-500 font-medium">Your cart is empty. <br><button onclick="currentStep=1; updateUI(); document.getElementById(\'step9\').classList.remove(\'active\'); document.getElementById(\'step1\').classList.add(\'active\');" class="text-pink-500 font-bold uppercase tracking-widest mt-4">Go back</button></li>'; return;
             }
 
             allItems.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'px-5 py-5 flex items-start';
+                const li = document.createElement('li'); li.className = 'px-5 py-5 flex items-start';
                 
                 let iconClass = 'fa-shirt';
-                let isHat = item.type === 'Hat/Cap';
-                if(item.type === 'Hoodie') iconClass = 'fa-user-ninja';
+                if(item.baseType === 'Hoodie' || item.baseType === 'Zip-Up') iconClass = 'fa-user-ninja';
+                else if(item.baseType === 'Hat/Cap' || item.baseType === 'Beanie') iconClass = 'fa-hat-wizard';
+                else if(item.baseType === 'Pants' || item.baseType === 'Shorts') iconClass = 'fa-grip-lines';
+                else if(item.baseType === 'Bag') iconClass = 'fa-bag-shopping';
+                else if(item.baseType === 'Socks') iconClass = 'fa-socks';
 
                 const isCurrent = (index === allItems.length - 1) && (currentGarment.type && currentGarment.totalQty > 0);
                 const deleteAction = isCurrent ? 'clearCurrentItem()' : `removeItem(${index})`;
+                const nameStr = item.subStyle ? item.subStyle : item.type;
 
                 let sizeStr = Object.entries(item.sizes).filter(([s, q]) => q > 0).map(([s, q]) => `<span class="font-extrabold text-gray-800">${q}</span>${s}`).join(', ');
-                
                 let artSummaryHTML = '';
                 if(item.artworkDetails) {
                     item.placements.forEach(p => {
@@ -1311,11 +860,9 @@
                         if(art) {
                             const artIcon = art.type === 'file' ? '<i class="fa-solid fa-paperclip text-xs mr-1"></i>' : '<i class="fa-solid fa-font text-xs mr-1"></i>';
                             const noteText = art.notes ? `<div class="text-[10px] text-gray-400 mt-0.5 ml-4 italic border-l-2 border-gray-200 pl-2 line-clamp-1">${art.notes}</div>` : '';
-                            
                             let extraBadges = '';
                             if (art.needsUpgrade) extraBadges += `<span class="text-[9px] bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded uppercase tracking-wider font-bold ml-2">Needs Upgrade</span>`;
                             if (art.isDigitized === 'no') extraBadges += `<span class="text-[9px] bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded uppercase tracking-wider font-bold ml-2">Needs Digitizing</span>`;
-
                             artSummaryHTML += `<div class="mt-2"><span class="text-xs font-bold text-gray-700">${p} <span class="text-[10px] text-pink-500 font-extrabold ml-1">(${item.decorations[p]})</span></span><br><div class="mt-1 flex flex-wrap gap-1 items-center"><span class="text-[10px] uppercase tracking-wider text-primary font-bold bg-gray-100 px-2 py-0.5 rounded-md inline-flex items-center">${artIcon} ${art.content}</span>${extraBadges}</div>${noteText}</div>`;
                         }
                     });
@@ -1323,98 +870,41 @@
 
                 const fitStr = item.fit && item.fit !== 'Unisex' ? item.fit + ' ' : '';
                 const tierPill = item.tier === 'Customer Supplied' ? `<span class="bg-gray-800 text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-bold ml-2 align-middle">Supplied</span>` : '';
+                const expressPill = item.department === 'Express' ? `<span class="bg-pink-500 text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-bold ml-2 align-middle"><i class="fa-solid fa-bolt mr-1"></i>Express Match</span><div class="text-[10px] font-bold text-pink-500 mt-1"><i class="fa-regular fa-image mr-1"></i>${item.expressImage}</div>` : '';
 
-                li.innerHTML = `
-                    <div class="bg-white shadow-sm rounded-2xl w-12 h-12 flex items-center justify-center mr-4 text-primary shrink-0">
-                        ${isHat ? '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4c-3.3 0-6 2.7-6 6v2H4a2 2 0 0 0-2 2v2h20v-2a2 2 0 0 0-2-2h-2v-2c0-3.3-2.7-6-6-6z"></path><path d="M12 4v8"></path></svg>' : `<i class="fa-solid ${iconClass} text-xl"></i>`}
-                    </div>
-                    <div class="flex-1 overflow-hidden">
-                        <h4 class="font-extrabold text-gray-900 text-lg uppercase tracking-tight leading-tight">${item.totalQty}x ${item.color} ${fitStr}${item.type} ${tierPill}</h4>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">${item.tier}</p>
-                        <p class="text-xs uppercase tracking-wider text-gray-500 mt-2 font-semibold">Sizes: ${sizeStr}</p>
-                        <div class="mt-2 border-t border-gray-100 pt-1">${artSummaryHTML}</div>
-                    </div>
-                    <button type="button" onclick="${deleteAction}" class="text-gray-300 hover:text-red-500 p-2 ml-2 transition-colors mt-1">
-                        <i class="fa-solid fa-trash-can text-lg"></i>
-                    </button>
-                `;
+                li.innerHTML = `<div class="bg-white shadow-sm rounded-2xl w-12 h-12 flex items-center justify-center mr-4 text-primary shrink-0"><i class="fa-solid ${iconClass} text-xl"></i></div><div class="flex-1 overflow-hidden"><h4 class="font-extrabold text-gray-900 text-lg uppercase tracking-tight leading-tight">${item.totalQty}x ${item.color} ${fitStr}${nameStr} ${tierPill}${expressPill}</h4><p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">${item.tier}</p><p class="text-xs uppercase tracking-wider text-gray-500 mt-2 font-semibold">Sizes: ${sizeStr}</p><div class="mt-2 border-t border-gray-100 pt-1">${artSummaryHTML}</div></div><button type="button" onclick="${deleteAction}" class="text-gray-300 hover:text-red-500 p-2 ml-2 transition-colors mt-1"><i class="fa-solid fa-trash-can text-lg"></i></button>`;
                 listEl.appendChild(li);
             });
         }
 
         function clearCurrentItemSilently() {
-            currentGarment = { type: '', fit: '', tier: '', color: '', placements: [], decorations: {}, artworkDetails: {}, sizes: { YS:0, YM:0, YL:0, XS:0, S:0, M:0, L:0, XL:0, '2XL':0, '3XL':0, '4XL':0 }, totalQty: 0 };
-            
-            document.querySelectorAll('input[name="garmentType"]').forEach(el => el.checked = false);
-            document.querySelectorAll('input[name="modalFit"]').forEach(el => el.checked = false);
-            document.querySelectorAll('input[name="modalTier"]').forEach(el => el.checked = false);
-            document.querySelectorAll('input[name="garmentColor"]').forEach(el => el.checked = false);
-            document.querySelectorAll('input[name="placement"]').forEach(el => el.checked = false);
-            
-            ['YS','YM','YL','XS','S','M','L','XL','2XL','3XL','4XL'].forEach(s => document.getElementById(`qty-${s}`).value = 0);
-            document.getElementById('totalQtyDisplay').innerText = '0';
-            updateGlobalCartBadge();
+            currentGarment = { department: '', category: '', type: '', subStyle: '', baseType: '', fit: '', tier: '', color: '', expressImage: '', placements: [], decorations: {}, artworkDetails: {}, sizes: { XS:0, S:0, M:0, L:0, XL:0, '2XL':0, '3XL':0, '4XL':0, '5XL':0, YS:0, YM:0, YL:0 }, totalQty: 0 };
+            document.querySelectorAll('input[name="department"]').forEach(el => el.checked = false); document.querySelectorAll('input[name="garmentColor"]').forEach(el => el.checked = false); document.querySelectorAll('input[name="placement"]').forEach(el => el.checked = false); document.getElementById('customColorInput').value = ''; document.getElementById('customColorWrapper').classList.add('hidden'); document.getElementById('expressFileName').innerText = 'Tap to select image';
+            document.getElementById('categoryGrid').innerHTML = ''; document.getElementById('itemGrid').innerHTML = '';
+            ['XS','S','M','L','XL','2XL','3XL','4XL','5XL','YS','YM','YL'].forEach(s => document.getElementById(`qty-${s}`).value = 0);
+            document.getElementById('totalQtyDisplay').innerText = '0'; updateGlobalCartBadge();
         }
 
-        function clearCurrentItem() {
-            clearCurrentItemSilently();
-            renderOrderSummary();
-            if (orderItems.length === 0) { showError(7); }
-        }
-
-        function removeItem(index) {
-            orderItems.splice(index, 1);
-            renderOrderSummary();
-            updateGlobalCartBadge();
-            if(orderItems.length === 0 && !currentGarment.type) { showError(7); }
-        }
+        function clearCurrentItem() { clearCurrentItemSilently(); renderOrderSummary(); if (orderItems.length === 0) { showError(9); } }
+        function removeItem(index) { orderItems.splice(index, 1); renderOrderSummary(); updateGlobalCartBadge(); if(orderItems.length === 0 && !currentGarment.type) { showError(9); } }
 
         function submitOrder() {
-            if (!validateStep(7)) { showError(7); return; }
-            const btnSubmit = document.getElementById('btnSubmit');
-            btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Processing...';
-            btnSubmit.disabled = true;
-
-            setTimeout(() => {
-                document.getElementById('step7').classList.remove('active');
-                currentStep = 8; 
-                document.getElementById('stepSuccess').classList.add('active');
-                document.getElementById('successName').innerText = customerInfo.name.split(' ')[0];
-                updateUI();
-                btnSubmit.innerHTML = 'Request Quote <i class="fa-solid fa-paper-plane ml-3 text-sm"></i>';
-                btnSubmit.disabled = false;
-            }, 1500);
+            if (!validateStep(9)) { showError(9); return; }
+            const btnSubmit = document.getElementById('btnSubmit'); btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Processing...'; btnSubmit.disabled = true;
+            setTimeout(() => { document.getElementById('step9').classList.remove('active'); currentStep = 10; document.getElementById('stepSuccess').classList.add('active'); document.getElementById('successName').innerText = customerInfo.name.split(' ')[0]; updateUI(); btnSubmit.innerHTML = 'Request Quote <i class="fa-solid fa-paper-plane ml-3 text-sm"></i>'; btnSubmit.disabled = false; }, 1500);
         }
 
         function resetForm() {
-            clearCurrentItemSilently();
-            orderItems = [];
-            updateGlobalCartBadge();
-            document.getElementById('customerName').value = ''; 
-            document.getElementById('customerEmail').value = '';
-            document.getElementById('customerPhone').value = ''; 
-            document.getElementById('orderNotes').value = '';
-            document.getElementById('eventDate').value = '';
-            document.getElementById('shippingAddress').value = '';
-            document.getElementById('delStandard').checked = true;
-            document.getElementById('fulPickup').checked = true;
-            document.getElementById('addressContainer').classList.add('hidden');
-            document.getElementById('termsCheck').checked = false;
-            
-            document.getElementById('stepSuccess').classList.remove('active');
-            document.getElementById('stepIndicatorContainer').classList.remove('hidden');
-            document.getElementById('progressBarContainer').classList.remove('hidden');
-            document.getElementById('actionBar').classList.remove('hidden');
-            currentStep = 1; document.getElementById('step1').classList.add('active');
-            updateUI();
+            clearCurrentItemSilently(); orderItems = []; updateGlobalCartBadge();
+            document.getElementById('customerName').value = ''; document.getElementById('customerEmail').value = ''; document.getElementById('customerPhone').value = ''; 
+            document.getElementById('orderNotes').value = ''; document.getElementById('eventDate').value = ''; document.getElementById('shippingAddress').value = '';
+            document.getElementById('delStandard').checked = true; document.getElementById('fulPickup').checked = true; document.getElementById('addressContainer').classList.add('hidden'); document.getElementById('termsCheck').checked = false;
+            document.getElementById('stepSuccess').classList.remove('active'); document.getElementById('stepIndicatorContainer').classList.remove('hidden'); document.getElementById('progressBarContainer').classList.remove('hidden'); document.getElementById('actionBar').classList.remove('hidden');
+            currentStep = 1; document.getElementById('step1').classList.add('active'); updateUI();
         }
 
         function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'fixed top-6 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-2xl z-50 transition-opacity duration-300 uppercase tracking-widest';
-            toast.innerText = message;
-            document.body.appendChild(toast);
-            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
+            const toast = document.createElement('div'); toast.className = 'fixed top-6 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-2xl z-50 transition-opacity duration-300 uppercase tracking-widest'; toast.innerText = message; document.body.appendChild(toast); setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
         }
     </script>
 </body>
