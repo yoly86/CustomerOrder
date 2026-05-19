@@ -371,16 +371,17 @@
         ];
 
         const placementGroups = {
-            'T-Shirt': ['Full Front', 'Front Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Left Short Sleeve', 'Right Short Sleeve'],
-            'Tank Top': ['Full Front', 'Front Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar'],
-            'Long Sleeve': ['Full Front', 'Front Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Left Long Sleeve', 'Right Long Sleeve'],
-            'Polo': ['Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Left Short Sleeve', 'Right Short Sleeve'],
-            'Sweater': ['Full Front', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Left Long Sleeve', 'Right Long Sleeve'],
-            'Hoodie': ['Full Front', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Left Long Sleeve', 'Right Long Sleeve', 'Hood (Left Side)', 'Hood (Right Side)'],
-            'Zip-Up': ['Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Left Long Sleeve', 'Right Long Sleeve'],
-            'Pants': ['Left Thigh (Front)', 'Right Thigh (Front)', 'Left Calf', 'Right Calf', 'Back Right Pocket'],
-            'Shorts': ['Left Front Leg', 'Right Front Leg', 'Back Right Pocket'],
-            'Hat/Cap': ['Front Center', 'Front Left', 'Front Right', 'Left Side', 'Right Side', 'Back Center', 'Back Arch (Over Strap)'],
+            'T-Shirt': ['Full Chest', 'Center Chest', 'Left Chest', 'Right Chest', 'Lower Pocket', 'Lower Hem Left', 'Lower Hem Right', 'Side Left', 'Side Right', 'Full Back', 'Upper Back', 'Back Collar', 'Lower Back', 'Full Sleeve Left', 'Full Sleeve Right', 'Shoulder Left', 'Shoulder Right', 'Mid Sleeve Left', 'Mid Sleeve Right', 'Lower Sleeve Left', 'Lower Sleeve Right'],
+            'Tank Top': ['Full Chest', 'Center Chest', 'Left Chest', 'Right Chest', 'Lower Pocket', 'Lower Hem Left', 'Lower Hem Right', 'Side Left', 'Side Right', 'Full Back', 'Upper Back', 'Back Collar', 'Lower Back'],
+            'Long Sleeve': ['Full Chest', 'Center Chest', 'Left Chest', 'Right Chest', 'Lower Pocket', 'Lower Hem Left', 'Lower Hem Right', 'Full Back', 'Upper Back', 'Back Collar', 'Lower Back', 'Full Sleeve Left', 'Full Sleeve Right', 'Shoulder Left', 'Shoulder Right', 'Mid Sleeve Left', 'Mid Sleeve Right', 'Lower Sleeve Left', 'Lower Sleeve Right'],
+            'Polo': ['Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Shoulder Left', 'Shoulder Right', 'Mid Sleeve Left', 'Mid Sleeve Right'],
+            'Sweater': ['Full Chest', 'Center Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Back Collar', 'Lower Back', 'Full Sleeve Left', 'Full Sleeve Right'],
+            'Hoodie': ['Full Chest', 'Left Chest', 'Right Chest', 'Full Back', 'Upper Back', 'Lower Back', 'Full Sleeve Left', 'Full Sleeve Right', 'Hood (Left Side)', 'Hood (Right Side)'],
+            'Zip-Up': ['Left Chest', 'Right Chest', 'Lower Pocket', 'Full Back', 'Upper Back', 'Lower Back', 'Full Sleeve Left', 'Full Sleeve Right', 'Hood (Left Side)', 'Hood (Right Side)'],
+            // Kept these standard in case you add pants/hats later
+            'Pants': ['Left Thigh (Front)', 'Right Thigh (Front)', 'Left Calf', 'Right Calf', 'Back Left Pocket', 'Back Right Pocket'],
+            'Shorts': ['Left Thigh (Front)', 'Right Thigh (Front)', 'Back Left Pocket', 'Back Right Pocket'],
+            'Hat/Cap': ['Front Center', 'Front Left Panel', 'Front Right Panel', 'Left Side', 'Right Side', 'Back Center', 'Back Arch'],
             'Beanie': ['Front Center', 'Front Left', 'Front Right', 'Back Center'],
             'Bag': ['Front Center', 'Front Pocket'],
             'Socks': ['Outer Ankle', 'Inner Ankle', 'Top of Foot']
@@ -548,14 +549,64 @@
 
             const placements = placementGroups[base] ? [...placementGroups[base]] : [];
             placements.push('Custom / See Notes');
-            const container = document.getElementById('placementOptions'); container.innerHTML = '';
+            const container = document.getElementById('placementOptions'); 
+            container.innerHTML = '';
+            
+            // Determine if we should show men's or women's mannequins. Default to men's for unisex/supplied.
+            const genderKey = currentGarment.fit === "Women's" ? 'w' : 'm';
+
             placements.forEach((place) => {
                 const safeId = place.replace(/[^a-zA-Z0-9]/g, '');
                 const isChecked = currentGarment.placements.includes(place) ? 'checked' : '';
-                container.innerHTML += `<div><input type="checkbox" name="placement" id="place_${safeId}" value="${place}" class="card-checkbox" onchange="validateStep(5)" ${isChecked}><label for="place_${safeId}"><div class="w-full h-16 flex items-center justify-center mb-3 bg-white rounded-lg text-gray-400 shadow-sm border border-gray-100"><i class="fa-solid fa-crosshairs text-2xl"></i></div><span class="text-xs font-extrabold tracking-widest uppercase text-center leading-tight">${place}</span></label></div>`;
+                
+                let visualHtml = '';
+                if (place === 'Custom / See Notes') {
+                     visualHtml = `<i class="fa-solid fa-pen-to-square text-2xl text-gray-400"></i>`;
+                } else {
+                     // Check our map. If you add pants later and it's missing from the map, it will fallback to an icon.
+                     const imageObj = placementImageMap[place];
+                     if (imageObj && imageObj[genderKey]) {
+                         visualHtml = `<img src="Icons/${imageObj[genderKey]}" alt="${place}" class="h-14 w-14 object-contain opacity-80 mix-blend-multiply">`;
+                     } else {
+                         visualHtml = `<i class="fa-solid fa-crosshairs text-2xl text-gray-400"></i>`;
+                     }
+                }
+
+                container.innerHTML += `
+                <div>
+                    <input type="checkbox" name="placement" id="place_${safeId}" value="${place}" class="card-checkbox" onchange="validateStep(5)" ${isChecked}>
+                    <label for="place_${safeId}">
+                        <div class="w-full h-20 flex items-center justify-center mb-3 bg-white rounded-xl text-gray-400 shadow-sm border border-gray-100 overflow-hidden">
+                            ${visualHtml}
+                        </div>
+                        <span class="text-[10px] font-extrabold tracking-widest uppercase text-center leading-tight">${place}</span>
+                    </label>
+                </div>`;
             });
         }
-
+        const placementImageMap = {
+            'Full Chest': { m: 'Men-CenterChest.png', w: 'Women-FullChest.png' },
+            'Center Chest': { m: 'Men-CenterChest.png', w: 'Women-CenterChest.png' },
+            'Left Chest': { m: 'Men-LeftChest.png', w: 'Women-LeftChest.png' },
+            'Right Chest': { m: 'Men-RightChest.png', w: 'Women-RightChest.png' },
+            'Lower Pocket': { m: 'Men-LowerPocket.png', w: 'Women-LowerPocket.png' },
+            'Lower Hem Left': { m: 'Men-LowerHem.png', w: 'Women-LowerHemLeft.png' },
+            'Lower Hem Right': { m: 'Men-LowerHemRight.png', w: 'Women-LowerHemRight.png' },
+            'Side Left': { m: 'Men-SideLeft.png', w: 'Women-SideLeft.png' },
+            'Side Right': { m: 'Men-SideRight.png', w: 'Women-SideRight.png' },
+            'Full Sleeve Left': { m: 'Men-FullSleeveLeft.png', w: 'Women-FullSleeveLeft.png' },
+            'Full Sleeve Right': { m: 'Men-FullSleeveRight.png', w: 'Women-FullSleeveRight.png' },
+            'Shoulder Left': { m: 'Men-ShoulderLeft.png', w: 'Women-ShoulderLeft.png' },
+            'Shoulder Right': { m: 'Men-ShoulderRight.png', w: 'Women-ShoulderRight.png' },
+            'Mid Sleeve Left': { m: 'Men-ArmMidSleeveLeft.png', w: 'Women-ArmMidSleeveLeft.png' },
+            'Mid Sleeve Right': { m: 'Men-ArmMidSleeveRight.png', w: 'Women-ArmMidSleeveRight.png' },
+            'Lower Sleeve Left': { m: 'Men-ArmLowerSleeveLeft.png', w: 'Women-ArmLowerSleeveLeft.png' },
+            'Lower Sleeve Right': { m: 'Men-ArmLowerSleeveRight.png', w: 'Women-ArmLowerSleeveRight.png' },
+            'Full Back': { m: 'Men-BackFull.png', w: 'Women-BackFull.png' },
+            'Upper Back': { m: 'Men-BackUpper.png', w: 'Women-BackUpper.png' },
+            'Back Collar': { m: 'Men-BackCollar.png', w: 'Women-BackCollar.png' },
+            'Lower Back': { m: 'Men-BackLower.png', w: 'Women-BackLower.png' }
+        };
         function selectItem(index) {
             const dept = currentGarment.department; const cat = currentGarment.category;
             const item = catalogData[dept][cat][index];
