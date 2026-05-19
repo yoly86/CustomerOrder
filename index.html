@@ -42,7 +42,7 @@
         
         .style-radio { display: none; }
         .style-radio + label {
-            display: block; padding: 0.75rem 1rem; border: 2px solid transparent; background-color: #F9FAFB;
+            display: flex; align-items: center; padding: 0.75rem 1rem; border: 2px solid transparent; background-color: #F9FAFB;
             border-radius: 0.75rem; cursor: pointer; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
             letter-spacing: 0.05em; transition: all 0.2s; color: #4B5563;
         }
@@ -309,44 +309,44 @@
         const catalogData = {
             "Men's": {
                 "Tops": [
-                    { id: "mT1", name: "T-Shirts", desc: "Crewnecks, V-Necks", icon: "Icons/tshirt.png", baseType: "T-Shirt", styles: ["Standard Crewneck", "V-Neck", "Heavyweight Boxy Fit", "Pocket Tee"] },
-                    { id: "mT2", name: "Tank Tops & Sleeveless", desc: "Muscle, Stringers", icon: "Icons/Tank.png", baseType: "Tank Top", styles: ["Standard Tank Top", "Muscle Tank", "Stringer"] },
+                    { id: "mT1", name: "T-Shirts", desc: "Crewnecks, V-Necks", icon: "Icons/tshirt.png", baseType: "T-Shirt", styles: [{name: "Standard Crewneck", icon: "StandardCrewneck.png"}, {name: "V-Neck", icon: "VNeck.png"}, {name: "Heavyweight Boxy Fit", icon: "HeavyweightBoxyFit.png"}, {name: "Pocket Tee", icon: "PocketTShirt.png"}] },
+                    { id: "mT2", name: "Tank Tops & Sleeveless", desc: "Muscle, Stringers", icon: "Icons/Tank.png", baseType: "Tank Top", styles: [{name: "Standard Tank Top", icon: "StandardTank.png"}, {name: "Muscle Tank", icon: "MuscleTank.png"}, {name: "Stringer", icon: "Stringer.png"}] },
                     { id: "mT3", name: "Long Sleeves", desc: "Standard full arm", icon: "Icons/Long Sleeve.png", baseType: "Long Sleeve" },
                     { id: "mT4", name: "Polos & Button-Downs", desc: "Collared shirts", icon: "Icons/Polo.png", baseType: "Polo" },
                     { id: "mT5", name: "Sweaters & Knits", desc: "Crewneck pullovers", icon: "Icons/Sweater.png", baseType: "Sweater" },
-                    { id: "mT6", name: "Hoodies (Pullover)", desc: "Standard hoodies", icon: "Icons/Hoodies.png", baseType: "Hoodie", styles: ["Standard Fleece", "Heavyweight", "Lightweight / French Terry"] },
-                    { id: "mT7", name: "Outerwear & Jackets", desc: "Zip hoodies, track jackets", icon: "Icons/Jacket.png", baseType: "Zip-Up", styles: ["Full-Zip Hoodie", "Quarter-Zip", "Track Jacket", "Windbreaker"] }
+                    { id: "mT6", name: "Hoodies (Pullover)", desc: "Standard hoodies", icon: "Icons/Hoodies.png", baseType: "Hoodie", styles: [{name: "Standard Fleece", icon: "StandardPulloverHoodie.png"}, {name: "Heavyweight", icon: "StandardPulloverHoodie.png"}, {name: "Lightweight / French Terry", icon: "StandardPulloverHoodie.png"}] },
+                    { id: "mT7", name: "Outerwear & Jackets", desc: "Zip hoodies, track jackets", icon: "Icons/Jacket.png", baseType: "Zip-Up", styles: [{name: "Full-Zip Hoodie", icon: "FullZipHoodie.png"}, {name: "Quarter-Zip", icon: "QuaterZip.png"}, {name: "Track Jacket", icon: "TrackJacket.png"}, {name: "Windbreaker", icon: "Windbreaker.png"}] }
                 ],
                 "Bottoms": [
-                    { id: "mB1", name: "Trousers & Sweats", desc: "Joggers, chinos", icon: "Icons/Pants.png", baseType: "Pants", styles: ["Fleece Joggers", "Sweatpants", "Chino Pants"] },
-                    { id: "mB2", name: "Shorts", desc: "Athletic, denim", icon: "Icons/Shorts.png", baseType: "Shorts", styles: ["Athletic / Mesh", "Fleece Shorts", "Chino Shorts"] }
+                    { id: "mB1", name: "Trousers & Sweats", desc: "Joggers, chinos", icon: "Icons/Pants.png", baseType: "Pants", styles: [{name: "Fleece Joggers", icon: "Pants.png"}, {name: "Sweatpants", icon: "Pants.png"}, {name: "Chino Pants", icon: "Pants.png"}] },
+                    { id: "mB2", name: "Shorts", desc: "Athletic, denim", icon: "Icons/Shorts.png", baseType: "Shorts", styles: [{name: "Athletic / Mesh", icon: "Shorts.png"}, {name: "Fleece Shorts", icon: "Shorts.png"}, {name: "Chino Shorts", icon: "Shorts.png"}] }
                 ]
             },
             "Women's": {
                 "Tops": [
-                    { id: "wT1", name: "T-Shirts", desc: "Crewnecks, crop tops", icon: "Icons/tshirt.png", baseType: "T-Shirt", styles: ["Standard Crewneck", "V-Neck", "Crop Top", "Oversized / Boxy"] },
-                    { id: "wT2", name: "Tank Tops & Sleeveless", desc: "Racerback, Tube Top", icon: "Icons/Tank.png", baseType: "Tank Top", styles: ["Racerback Tank", "Muscle Tank", "Tube Top", "Spaghetti Strap", "Standard Tank Top"] },
+                    { id: "wT1", name: "T-Shirts", desc: "Crewnecks, crop tops", icon: "Icons/tshirt.png", baseType: "T-Shirt", styles: [{name: "Standard Crewneck", icon: "StandardCrewneck.png"}, {name: "V-Neck", icon: "VNeck.png"}, {name: "Crop Top", icon: "CropTop.png"}, {name: "Oversized / Boxy", icon: "HeavyweightBoxyFit.png"}] },
+                    { id: "wT2", name: "Tank Tops & Sleeveless", desc: "Racerback, Tube Top", icon: "Icons/Tank.png", baseType: "Tank Top", styles: [{name: "Racerback Tank", icon: "Tank.png"}, {name: "Muscle Tank", icon: "MuscleTank.png"}, {name: "Tube Top", icon: "TubeTop.png"}, {name: "Spaghetti Strap", icon: "SpaghettiStrap.png"}, {name: "Standard Tank Top", icon: "StandardTank.png"}] },
                     { id: "wT3", name: "Long Sleeves", desc: "Standard full arm", icon: "Icons/Long Sleeve.png", baseType: "Long Sleeve" },
                     { id: "wT4", name: "Polos & Blouses", desc: "Button-downs, collared", icon: "Icons/Polo.png", baseType: "Polo" },
                     { id: "wT5", name: "Sweaters & Knits", desc: "Cardigans, pullovers", icon: "Icons/Sweater.png", baseType: "Sweater" },
-                    { id: "wT6", name: "Hoodies (Pullover)", desc: "Standard hoodies", icon: "Icons/Hoodies.png", baseType: "Hoodie", styles: ["Standard Fleece", "Cropped Hoodie", "Oversized Fit"] },
-                    { id: "wT7", name: "Outerwear & Jackets", desc: "Zip hoodies, coats", icon: "Icons/Jacket.png", baseType: "Zip-Up", styles: ["Full-Zip Hoodie", "Quarter-Zip", "Track Jacket", "Windbreaker"] }
+                    { id: "wT6", name: "Hoodies (Pullover)", desc: "Standard hoodies", icon: "Icons/Hoodies.png", baseType: "Hoodie", styles: [{name: "Standard Fleece", icon: "StandardPulloverHoodie.png"}, {name: "Cropped Hoodie", icon: "CroppedHoodie.png"}, {name: "Oversized Fit", icon: "OversizeHoodie.png"}] },
+                    { id: "wT7", name: "Outerwear & Jackets", desc: "Zip hoodies, coats", icon: "Icons/Jacket.png", baseType: "Zip-Up", styles: [{name: "Full-Zip Hoodie", icon: "FullZipHoodie.png"}, {name: "Quarter-Zip", icon: "QuaterZip.png"}, {name: "Track Jacket", icon: "TrackJacket.png"}, {name: "Windbreaker", icon: "Windbreaker.png"}] }
                 ],
                 "Bottoms": [
-                    { id: "wB1", name: "Trousers & Sweats", desc: "Joggers, leggings", icon: "Icons/Pants.png", baseType: "Pants", styles: ["Leggings", "Fleece Joggers", "Sweatpants", "Wide-Leg Pants"] },
-                    { id: "wB2", name: "Shorts", desc: "Athletic, biker, denim", icon: "Icons/Shorts.png", baseType: "Shorts", styles: ["Biker Shorts", "Athletic / Running", "Fleece Shorts"] }
+                    { id: "wB1", name: "Trousers & Sweats", desc: "Joggers, leggings", icon: "Icons/Pants.png", baseType: "Pants", styles: [{name: "Leggings", icon: "Pants.png"}, {name: "Fleece Joggers", icon: "Pants.png"}, {name: "Sweatpants", icon: "Pants.png"}, {name: "Wide-Leg Pants", icon: "Pants.png"}] },
+                    { id: "wB2", name: "Shorts", desc: "Athletic, biker, denim", icon: "Icons/Shorts.png", baseType: "Shorts", styles: [{name: "Biker Shorts", icon: "Shorts.png"}, {name: "Athletic / Running", icon: "Shorts.png"}, {name: "Fleece Shorts", icon: "Shorts.png"}] }
                 ]
             },
             "Accessories": {
                 "Headwear": [
-                    { id: "aH1", name: "Hats & Caps", desc: "Snapbacks, truckers", icon: "Icons/Hats.png", baseType: "Hat/Cap", styles: ["Snapback", "Trucker Hat", "Dad Hat", "Fitted Cap", "5-Panel"] },
-                    { id: "aH2", name: "Beanies & Winter Hats", desc: "Knit caps", icon: "Icons/Beenie.png", baseType: "Beanie", styles: ["Cuffed Beanie", "Slouch Beanie", "Pom Pom Beanie"] }
+                    { id: "aH1", name: "Hats & Caps", desc: "Snapbacks, truckers", icon: "Icons/Hats.png", baseType: "Hat/Cap", styles: [{name: "Snapback", icon: "hat6panel.png"}, {name: "Trucker Hat", icon: "hattrucker.png"}, {name: "Dad Hat", icon: "hatDadCap.png"}, {name: "Fitted Cap", icon: "Hats.png"}, {name: "5-Panel", icon: "Hats.png"}] },
+                    { id: "aH2", name: "Beanies & Winter Hats", desc: "Knit caps", icon: "Icons/Beenie.png", baseType: "Beanie", styles: [{name: "Cuffed Beanie", icon: "BeenieCuffed.png"}, {name: "Slouch Beanie", icon: "BeenieSlouched.png"}, {name: "Pom Pom Beanie", icon: "BeeniePomPom.png"}] }
                 ],
                 "Bags & Packs": [
-                    { id: "aB1", name: "Bags", desc: "Totes, duffels, backpacks", icon: "Icons/Bag.png", baseType: "Bag", styles: ["Canvas Tote", "Duffel Bag", "Backpack", "Drawstring Bag"] }
+                    { id: "aB1", name: "Bags", desc: "Totes, duffels, backpacks", icon: "Icons/Bag.png", baseType: "Bag", styles: [{name: "Canvas Tote", icon: "Bag.png"}, {name: "Duffel Bag", icon: "Bag.png"}, {name: "Backpack", icon: "Backpack.png"}, {name: "Drawstring Bag", icon: "Bag.png"}] }
                 ],
                 "Footwear & Other": [
-                    { id: "aF1", name: "Socks", desc: "Athletic, dress", icon: "Icons/Socks.png", baseType: "Socks", styles: ["Crew Socks", "Ankle Socks", "Knee-High"] }
+                    { id: "aF1", name: "Socks", desc: "Athletic, dress", icon: "Icons/Socks.png", baseType: "Socks", styles: [{name: "Crew Socks", icon: "Socks.png"}, {name: "Ankle Socks", icon: "Socks.png"}, {name: "Knee-High", icon: "Socks.png"}] }
                 ]
             }
         };
@@ -564,9 +564,16 @@
 
             if (item.styles && item.styles.length > 0) {
                 modalRequiresStyle = true; const styleOptions = document.getElementById('modalStyleOptions'); styleOptions.innerHTML = '';
-                item.styles.forEach((style) => {
-                    const safeId = style.replace(/[^a-zA-Z0-9]/g, '');
-                    styleOptions.innerHTML += `<div class="relative"><input type="radio" name="modalStyle" id="modStyle_${safeId}" value="${style}" class="style-radio" onchange="checkModalComplete()"><label for="modStyle_${safeId}">${style}</label></div>`;
+                item.styles.forEach((styleObj) => {
+                    // Pull the name and icon from the object
+                    const styleName = styleObj.name;
+                    const styleIcon = styleObj.icon;
+                    const safeId = styleName.replace(/[^a-zA-Z0-9]/g, '');
+                    
+                    // Create the image element if an icon exists
+                    const iconHtml = styleIcon ? `<img src="Icons/${styleIcon}" alt="${styleName}" class="w-8 h-8 object-contain mr-3 opacity-80">` : '';
+
+                    styleOptions.innerHTML += `<div class="relative"><input type="radio" name="modalStyle" id="modStyle_${safeId}" value="${styleName}" class="style-radio" onchange="checkModalComplete()"><label for="modStyle_${safeId}">${iconHtml}<span>${styleName}</span></label></div>`;
                 });
                 document.getElementById('modalStyleContainerWrapper').classList.remove('hidden');
                 document.getElementById('modalErrorText').classList.add('hidden');
