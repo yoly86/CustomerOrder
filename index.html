@@ -9,6 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        // Replace with your actual EmailJS Public Key
+        emailjs.init("YG9Nkx06R6MsKCr1q_"); 
+    })();
+</script>
     <script>
         tailwind.config = {
             theme: {
@@ -1013,10 +1020,87 @@ const baseIconsMap = { 'T-Shirt': './Icons/tshirt.png', 'Tank Top': './Icons/Tan
         function clearCurrentItem() { clearCurrentItemSilently(); renderOrderSummary(); if (orderItems.length === 0) { showError(9); } }
         function removeItem(index) { orderItems.splice(index, 1); renderOrderSummary(); updateGlobalCartBadge(); if(orderItems.length === 0 && !currentGarment.type) { showError(9); } }
 
-        function submitOrder() {
+        async function submitOrder() {
             if (!validateStep(9)) { showError(9); return; }
-            const btnSubmit = document.getElementById('btnSubmit'); btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Processing...'; btnSubmit.disabled = true;
-            setTimeout(() => { document.getElementById('step9').classList.remove('active'); currentStep = 10; document.getElementById('stepSuccess').classList.add('active'); document.getElementById('successName').innerText = customerInfo.name.split(' ')[0]; updateUI(); btnSubmit.innerHTML = 'Request Quote <i class="fa-solid fa-paper-plane ml-3 text-sm"></i>'; btnSubmit.disabled = false; }, 1500);
+            
+            const btnSubmit = document.getElementById('btnSubmit'); 
+            btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Generating Quote...'; 
+            btnSubmit.disabled = true;
+
+            try {
+                let expressImageUrl = 'None provided';
+
+                // 1. If there is an Express image, upload it to ImgBB first
+                const expressFileInput = document.getElementById('expressFileInput');
+                if (currentGarment.department === 'Express' && expressFileInput.files.length > 0) {
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Uploading Image...';
+                    
+                    const formData = new FormData();
+                    formData.append('image', expressFileInput.files[0]);
+                    
+                    // Replace YOUR_IMGBB_API_KEY with your actual key
+                    const imgbbResponse = await fetch('https://api.imgbb.com/1/upload?key=59c629d3ebd57170f73e40cd0479b21e', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const imgbbData = await imgbbResponse.json();
+                    if (imgbbData.success) {
+                        expressImageUrl = imgbbData.data.url;
+                    }
+                }
+
+                btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Sending Email...';
+
+                // 2. Gather all items
+                let allItems = [...orderItems]; 
+                if (currentGarment.type && currentGarment.totalQty > 0) allItems.push(currentGarment);
+
+                // 3. Build the text for the email body
+                let orderDetailsText = `FULFILLMENT: ${customerInfo.fulfillment}\n`;
+                if (customerInfo.address) orderDetailsText += `Address: ${customerInfo.address}\n`;
+                orderDetailsText += `Production: ${customerInfo.deliveryOption}\n`;
+                if (customerInfo.eventDate) orderDetailsText += `Event Date: ${customerInfo.eventDate}\n`;
+                if (customerInfo.notes) orderDetailsText += `Notes: ${customerInfo.notes}\n\n`;
+                
+                orderDetailsText += `EXPRESS MATCH IMAGE: ${expressImageUrl}\n\n`;
+                orderDetailsText += `--- ORDER ITEMS ---\n`;
+                
+                allItems.forEach((item, index) => {
+                    const fit = item.fit !== 'Unisex' ? `(${item.fit}) ` : '';
+                    const styleName = item.subStyle ? item.subStyle : item.type;
+                    orderDetailsText += `\nITEM #${index + 1}: ${item.totalQty}x ${item.color} ${fit}${styleName}\n`;
+                    
+                    let sizeStr = Object.entries(item.sizes).filter(([s, q]) => q > 0).map(([s, q]) => `${q}x ${s}`).join(', ');
+                    orderDetailsText += `Sizes: ${sizeStr}\n`;
+                    orderDetailsText += `Placements: ${item.placements.map(p => `${p} [${item.decorations[p]}]`).join(', ')}\n`;
+                });
+
+                // 4. Send the data to EmailJS
+                const templateParams = {
+                    customer_name: customerInfo.name,
+                    customer_email: customerInfo.email,
+                    customer_phone: customerInfo.phone,
+                    order_details: orderDetailsText
+                };
+
+                // Replace these with your actual EmailJS IDs
+                await emailjs.send('service_2dgw85a', 'template_icjjzi9', templateParams);
+
+                // 5. Success! Show the final screen.
+                document.getElementById('step9').classList.remove('active'); 
+                currentStep = 10; 
+                document.getElementById('stepSuccess').classList.add('active'); 
+                document.getElementById('successName').innerText = customerInfo.name.split(' ')[0]; 
+                updateUI(); 
+
+            } catch (error) {
+                console.error("Error submitting order:", error);
+                alert("There was an issue sending your request. Please try again or contact us directly.");
+            } finally {
+                btnSubmit.innerHTML = 'Request Quote <i class="fa-solid fa-paper-plane ml-3 text-sm"></i>'; 
+                btnSubmit.disabled = false; 
+            }
         }
 
         function resetForm() {
