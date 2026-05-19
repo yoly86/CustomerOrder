@@ -540,7 +540,21 @@
                 container.innerHTML += `<div><input type="radio" name="garmentType" id="item_${index}" value="${item.name}" class="card-radio" onclick="selectItem(${index})"><label for="item_${index}"><div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 shrink-0 p-2.5"><img src="${item.icon}" alt="${item.name}" class="w-full h-full object-contain opacity-80"></div><span class="block text-sm font-bold uppercase tracking-wider">${item.name}</span><span class="block text-[10px] font-medium opacity-75 mt-1 leading-tight">${item.desc}</span></label></div>`;
             });
         }
-
+        function getPlacementGroup(place) {
+            const front = ['Full Chest', 'Center Chest', 'Left Chest', 'Right Chest', 'Lower Pocket', 'Lower Hem Left', 'Lower Hem Right', 'Side Left', 'Side Right', 'Front Pocket', 'Left Thigh (Front)', 'Right Thigh (Front)', 'Front Center', 'Front Left Panel', 'Front Right Panel'];
+            const back = ['Full Back', 'Upper Back', 'Back Collar', 'Lower Back', 'Back Left Pocket', 'Back Right Pocket', 'Left Calf', 'Right Calf', 'Back Center', 'Back Arch'];
+            const sleeves = ['Full Sleeve Left', 'Full Sleeve Right', 'Shoulder Left', 'Shoulder Right', 'Mid Sleeve Left', 'Mid Sleeve Right', 'Lower Sleeve Left', 'Lower Sleeve Right'];
+            const hood = ['Hood (Left Side)', 'Hood (Right Side)'];
+            const sides = ['Left Side', 'Right Side'];
+            
+            if (front.includes(place)) return 'Front';
+            if (back.includes(place)) return 'Back';
+            if (sleeves.includes(place)) return 'Sleeves';
+            if (hood.includes(place)) return 'Hood';
+            if (sides.includes(place)) return 'Sides';
+            if (place === 'Custom / See Notes') return 'Custom';
+            return 'Other'; // Fallback for bags, socks, etc.
+        }
         function renderPlacements() {
             let base = currentGarment.baseType;
             if(base === 'Polo / Button-Down') base = 'Polo';
@@ -555,33 +569,58 @@
             // Determine if we should show men's or women's mannequins. Default to men's for unisex/supplied.
             const genderKey = currentGarment.fit === "Women's" ? 'w' : 'm';
 
-            placements.forEach((place) => {
-                const safeId = place.replace(/[^a-zA-Z0-9]/g, '');
-                const isChecked = currentGarment.placements.includes(place) ? 'checked' : '';
-                
-                let visualHtml = '';
-                if (place === 'Custom / See Notes') {
-                     visualHtml = `<i class="fa-solid fa-pen-to-square text-2xl text-gray-400"></i>`;
-                } else {
-                     // Check our map. If you add pants later and it's missing from the map, it will fallback to an icon.
-                     const imageObj = placementImageMap[place];
-                     if (imageObj && imageObj[genderKey]) {
-                         visualHtml = `<img src="Icons/${imageObj[genderKey]}" alt="${place}" class="h-14 w-14 object-contain opacity-80 mix-blend-multiply">`;
-                     } else {
-                         visualHtml = `<i class="fa-solid fa-crosshairs text-2xl text-gray-400"></i>`;
-                     }
-                }
+            // 1. Group the available placements for this specific garment
+            const groupedPlacements = {};
+            placements.forEach(place => {
+                const group = getPlacementGroup(place);
+                if (!groupedPlacements[group]) groupedPlacements[group] = [];
+                groupedPlacements[group].push(place);
+            });
 
-                container.innerHTML += `
-                <div>
-                    <input type="checkbox" name="placement" id="place_${safeId}" value="${place}" class="card-checkbox" onchange="validateStep(5)" ${isChecked}>
-                    <label for="place_${safeId}">
-                        <div class="w-full h-20 flex items-center justify-center mb-3 bg-white rounded-xl text-gray-400 shadow-sm border border-gray-100 overflow-hidden">
-                            ${visualHtml}
-                        </div>
-                        <span class="text-[10px] font-extrabold tracking-widest uppercase text-center leading-tight">${place}</span>
-                    </label>
-                </div>`;
+            // 2. Define the order you want the categories to display on the page
+            const groupOrder = ['Front', 'Back', 'Sleeves', 'Hood', 'Sides', 'Other', 'Custom'];
+
+            // 3. Render the HTML
+            groupOrder.forEach(groupName => {
+                if (groupedPlacements[groupName] && groupedPlacements[groupName].length > 0) {
+                    
+                    // Inject the Category Header (spans both columns)
+                    container.innerHTML += `
+                    <div class="col-span-2 mt-4 mb-1 border-b-2 border-gray-100 pb-2">
+                        <h3 class="font-extrabold text-gray-900 uppercase tracking-widest text-[11px]">${groupName}</h3>
+                    </div>`;
+                    
+                    // Inject the actual buttons for this category
+                    groupedPlacements[groupName].forEach((place) => {
+                        const safeId = place.replace(/[^a-zA-Z0-9]/g, '');
+                        const isChecked = currentGarment.placements.includes(place) ? 'checked' : '';
+                        
+                        let visualHtml = '';
+                        if (place === 'Custom / See Notes') {
+                             visualHtml = `<i class="fa-solid fa-pen-to-square text-3xl text-gray-300"></i>`;
+                        } else {
+                             const imageObj = placementImageMap[place];
+                             if (imageObj && imageObj[genderKey]) {
+                                 // Images bumped to h-24 w-24
+                                 visualHtml = `<img src="Icons/${imageObj[genderKey]}" alt="${place}" class="h-24 w-24 object-contain opacity-80 mix-blend-multiply">`;
+                             } else {
+                                 visualHtml = `<i class="fa-solid fa-crosshairs text-3xl text-gray-300"></i>`;
+                             }
+                        }
+
+                        // Container box bumped to h-32
+                        container.innerHTML += `
+                        <div>
+                            <input type="checkbox" name="placement" id="place_${safeId}" value="${place}" class="card-checkbox" onchange="validateStep(5)" ${isChecked}>
+                            <label for="place_${safeId}">
+                                <div class="w-full h-32 flex items-center justify-center mb-3 bg-white rounded-xl text-gray-400 shadow-sm border border-gray-100 overflow-hidden">
+                                    ${visualHtml}
+                                </div>
+                                <span class="text-[10px] font-extrabold tracking-widest uppercase text-center leading-tight">${place}</span>
+                            </label>
+                        </div>`;
+                    });
+                }
             });
         }
         const placementImageMap = {
