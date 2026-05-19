@@ -60,27 +60,30 @@
 <body class="text-gray-900 antialiased h-[100dvh] overflow-hidden flex flex-col">
 
     <header class="bg-white px-5 py-4 flex items-center justify-between z-10 relative shadow-sm">
-        <div>
-            <h1 class="text-xl font-extrabold tracking-tight">NEW ORDER</h1>
-            <div class="text-[10px] font-bold tracking-widest text-gray-500 uppercase mt-0.5" id="stepIndicatorContainer">
-                Step <span id="currentStepHeader">1</span> / 9
+        <div class="flex items-center">
+            <img src="Icons/logo1.png" alt="Logo" class="h-10 w-auto object-contain mr-3">
+            
+            <div>
+                <h1 class="text-xl font-extrabold tracking-tight">NEW ORDER</h1>
+                <div class="text-[10px] font-bold tracking-widest text-gray-700 uppercase mt-0.5" id="stepIndicatorContainer">
+                    Step <span id="currentStepHeader">1</span> / 9
+                </div>
             </div>
         </div>
+
         <button type="button" id="globalCartBtn" onclick="jumpToCart()" class="relative text-gray-800 hover:text-primary transition-colors p-2 -mr-2">
             <i class="fa-solid fa-cart-shopping text-2xl"></i>
             <span id="globalCartBadge" class="absolute top-0 right-0 bg-accent text-primary text-[10px] font-extrabold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm hidden">0</span>
         </button>
     </header>
 
-    <div class="bg-gray-100 h-1 w-full" id="progressBarContainer">
-        <div id="progressBar" class="bg-primary h-1 transition-all duration-300" style="width: 11.11%;"></div>
-    </div>
+    
 
     <main class="flex-1 overflow-y-auto px-5 py-6" id="formContainer">
 
         <div id="step1" class="step-container active max-w-md mx-auto">
             <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Department</h2>
-            <p class="text-gray-500 mb-6 font-medium">Select the department or supply your own items.</p>
+            <p class="text-gray-700 mb-6 font-medium">Select the department or supply your own items.</p>
             <div class="grid grid-cols-2 gap-3">
                 <div class="col-span-2">
                     <input type="radio" name="department" id="deptExpress" value="Express" class="card-radio" onchange="handleSelection(1)">
@@ -105,7 +108,7 @@
         <div id="step2" class="step-container max-w-md mx-auto">
             <h2 id="step2Heading" class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Category</h2>
             <div id="bcStep2" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
-            <p id="step2Desc" class="text-gray-500 mb-6 font-medium">Select a category.</p>
+            <p id="step2Desc" class="text-gray-700 mb-6 font-medium">Select a category.</p>
             
             <div id="categoryGrid" class="grid grid-cols-2 gap-3"></div>
             
@@ -129,7 +132,7 @@
         <div id="step3" class="step-container max-w-md mx-auto">
             <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Item Type</h2>
             <div id="bcStep3" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
-            <p class="text-gray-500 mb-6 font-medium">Select the specific item to configure your source.</p>
+            <p class="text-gray-700 mb-6 font-medium">Select the specific item to configure your source.</p>
             <div id="itemGrid" class="grid grid-cols-2 gap-3"></div>
             <p id="errorStep3" class="text-red-500 font-semibold text-sm mt-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select an item and complete its configuration.</p>
         </div>
@@ -154,7 +157,7 @@
         <div id="step5" class="step-container max-w-md mx-auto">
             <h2 id="placementHeading" class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Placements</h2>
             <div id="bcStep5" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
-            <p class="text-gray-500 mb-6 font-medium">Select all locations you would like your designs to be placed.</p>
+            <p class="text-gray-700 mb-6 font-medium">Select all locations you would like your designs to be placed.</p>
             <div class="grid grid-cols-2 gap-4" id="placementOptions"></div>
             <p id="errorStep5" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Select at least one location.</p>
         </div>
@@ -162,7 +165,7 @@
         <div id="step6" class="step-container max-w-md mx-auto">
             <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Method</h2>
             <div id="bcStep6" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
-            <p class="text-gray-500 mb-6 font-medium">Choose print or embroidery for each location.</p>
+            <p class="text-gray-700 mb-6 font-medium">Choose print or embroidery for each location.</p>
             <div id="decorationOptionsContainer" class="space-y-4"></div>
             <p id="errorStep6" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please select a method for all locations.</p>
         </div>
@@ -170,7 +173,7 @@
         <div id="step7" class="step-container max-w-md mx-auto">
             <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Artwork</h2>
             <div id="bcStep7" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
-            <p class="text-gray-500 mb-6 font-medium">Provide design details for each location.</p>
+            <p class="text-gray-700 mb-6 font-medium">Provide design details for each location.</p>
             <div id="artworkDetailsContainer" class="space-y-6"></div>
             <p id="errorStep7" class="text-red-500 font-semibold text-sm mt-6 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Please complete all fields and file selections above.</p>
         </div>
@@ -178,7 +181,7 @@
         <div id="step8" class="step-container max-w-md mx-auto">
             <h2 class="text-3xl font-extrabold mb-1 uppercase tracking-tight">Quantities</h2>
             <div id="bcStep8" class="text-[10px] font-extrabold text-accentDark mb-3 uppercase tracking-widest flex items-center flex-wrap gap-1.5"></div>
-            <p class="text-gray-500 mb-6 font-medium">Specify amounts for each size.</p>
+            <p class="text-gray-700 mb-6 font-medium">Specify amounts for each size.</p>
             
             <div class="bg-gray-50 rounded-3xl p-4 mb-6">
                 <div class="grid grid-cols-2 gap-x-6 gap-y-2">
@@ -214,7 +217,7 @@
 
         <div id="step9" class="step-container max-w-md mx-auto">
             <h2 class="text-3xl font-extrabold mb-2 uppercase tracking-tight">Review</h2>
-            <p class="text-gray-500 mb-6 font-medium">Review items and finalize request.</p>
+            <p class="text-gray-700 mb-6 font-medium">Review items and finalize request.</p>
             
             <div class="bg-gray-50 rounded-3xl mb-8 p-1">
                 <div class="px-5 py-4 flex justify-between items-center">
@@ -271,8 +274,12 @@
         </div>
 
     </main>
+<div class="w-full bg-gray-200 h-1.5" id="progressBarContainer">
+        <div id="progressBar" class="bg-gray-900 h-1.5 transition-all duration-300 rounded-r-full" style="width: 11.11%;"></div>
+    </div>
 
     <div class="action-bar flex justify-between items-center gap-4" id="actionBar">
+
         <button id="btnPrev" class="w-14 h-14 bg-gray-100 text-gray-600 rounded-2xl hover:bg-gray-200 transition-colors invisible flex items-center justify-center shrink-0" onclick="goBack()"><i class="fa-solid fa-chevron-left"></i></button>
         <button id="btnNext" class="flex-1 h-14 bg-primary text-white font-extrabold uppercase tracking-widest rounded-2xl shadow-md hover:bg-gray-800 transition-colors flex justify-center items-center" onclick="handleSelection(currentStep)">Next Step <i class="fa-solid fa-chevron-right ml-3 text-sm"></i></button>
         <button id="btnSubmit" class="flex-1 h-14 bg-accent text-primary font-extrabold uppercase tracking-widest rounded-2xl shadow-md hover:bg-accentDark transition-colors hidden justify-center items-center" onclick="submitOrder()">Request Quote <i class="fa-solid fa-paper-plane ml-3 text-sm"></i></button>
@@ -453,8 +460,34 @@
             currentStep = step; document.getElementById(`step${currentStep}`).classList.add('active'); updateUI();
         }
 
-        function goBack() { goToStep(getNextStep(currentStep, -1)); }
-
+        function goBack() { 
+            const nextStep = getNextStep(currentStep, -1);
+            
+            // If backing out to the first step, clear the current garment and UI selections
+            if (currentStep === 2 && nextStep === 1) {
+                // Clear the UI radio buttons on step 1
+                document.querySelectorAll('input[name="department"]').forEach(el => el.checked = false);
+                
+                // Wipe the current garment template, preserving the cart
+                currentGarment = {
+                    department: '', category: '', type: '', subStyle: '', baseType: '', fit: '', tier: '', color: '', expressImage: '',
+                    placements: [], decorations: {}, artworkDetails: {}, 
+                    sizes: { XS: 0, S: 0, M: 0, L: 0, XL: 0, '2XL': 0, '3XL': 0, '4XL': 0, '5XL': 0, YS: 0, YM: 0, YL: 0 },
+                    totalQty: 0
+                };
+                
+                // Reset secondary UI text/inputs
+                document.getElementById('customColorInput').value = '';
+                document.getElementById('customColorWrapper').classList.add('hidden');
+                document.getElementById('expressFileName').innerText = 'Tap to select image';
+                document.getElementById('categoryGrid').innerHTML = ''; 
+                document.getElementById('itemGrid').innerHTML = '';
+                ['XS','S','M','L','XL','2XL','3XL','4XL','5XL','YS','YM','YL'].forEach(s => document.getElementById(`qty-${s}`).value = 0);
+                document.getElementById('totalQtyDisplay').innerText = '0';
+            }
+            
+            goToStep(nextStep); 
+        }
         // Handles the decoupled color selection logic so Custom input box functions correctly
         function handleColorSelection() {
             const colRadio = document.querySelector('input[name="garmentColor"]:checked');
